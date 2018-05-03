@@ -12,7 +12,7 @@ Add cache and multiple forwarders to samba4  (Samba Internal DNS Back End + Dnsm
     iface lo:0 inet static
     address 127.0.0.5
 
-# If Centos/Rhel server::
+#. For Centos/Rhel::
 
     # /etc/sysconfig/network-scripts/ifcfg-lo:0
     DEVICE="lo:0"
