@@ -39,6 +39,8 @@ Add cache and multiple forwarders to samba4  (Samba Internal DNS Back End + Dnsm
     resolv-file=/etc/dnsmasq.resolv
     log-facility=/var/log/dnsmasq.log
     cache-size=9999
+    # For tests
+    #log-queries
 
 #. Restrict primary interfaces to Samba and add Dnsmasq as forwarder::
     
