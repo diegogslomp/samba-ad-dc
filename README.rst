@@ -32,8 +32,9 @@ Add cache and multiple forwarders to samba4  (Samba Internal DNS Back End + Dnsm
     # For tests
     #log-queries
 
-#. Restrict primary interfaces to Samba and add Dnsmasq as forwarder (/etc/samba/smb.conf)::
-
+#. Restrict primary interfaces to Samba and add Dnsmasq as forwarder::
+    
+    # /etc/samba/smb.conf
     [global]
     dns forwarder 127.0.0.5
     ...
