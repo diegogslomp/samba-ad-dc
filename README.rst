@@ -36,6 +36,7 @@ Add cache and multiple forwarders to samba4  (Samba Internal DNS Back End + Dnsm
     # /etc/dnsmasq.conf
     listen-address=127.0.0.5
     bind-interfaces
+    no-hosts
     resolv-file=/etc/dnsmasq.resolv
     log-facility=/var/log/dnsmasq.log
     cache-size=9999
