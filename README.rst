@@ -1,7 +1,7 @@
 samba-ad-dc-dnsmasq
 ===================
 
-Add cache and multiple forwarders to samba4  (Samba Internal DNS Back End + Dnsmasq)
+Add dns cache to samba4  (Samba Internal DNS Back End + Dnsmasq)
 
 #. Create an interface to dnsmasq listen (Debian)::
 
@@ -52,6 +52,6 @@ Add cache and multiple forwarders to samba4  (Samba Internal DNS Back End + Dnsm
     interfaces = eth0 lo  
     bind interfaces only = yes 
     
-#. Restart Dnsmasq + Samba
+#. Restart dnsmasq and samba
 
 #. Add dnsmasq to startup
