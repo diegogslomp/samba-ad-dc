@@ -4,7 +4,7 @@ samba-ad-dc-centos7-install
 #. Update and install shh epel bash-completion (Optional)::
    
     yum update -y
-    yum install wget epel-release bash-completion -y
+    yum install bash-completion epel-release vim wget -y
 
 #. Samba dependences::
    
@@ -18,9 +18,9 @@ samba-ad-dc-centos7-install
 #. Download and install from source::
    
     cd /usr/local/src/
-    wget https://download.samba.org/pub/samba/stable/samba-4.8.1.tar.gz
-    tar zxvf samba-4.8.1.tar.gz 
-    cd /usr/local/src/samba-4.8.1/
+    wget https://download.samba.org/pub/samba/stable/samba-4.8.2.tar.gz
+    tar zxvf samba-4.8.2.tar.gz 
+    cd /usr/local/src/samba-4.8.2/
     ./configure
     make -j 3
     make install
@@ -78,3 +78,23 @@ samba-ad-dc-centos7-install
     kinit administrator
     klist
     /usr/local/samba/bin/wbinfo -u
+    
+#. Create /etc/systemd/system/samba-ad-dc.service::
+
+    [Unit]
+    Description=Samba Active Directory Domain Controller
+    After=network.target remote-fs.target nss-lookup.target
+
+    [Service]
+    Type=forking
+    ExecStart=/usr/local/samba/sbin/samba -D
+    PIDFile=/usr/local/samba/var/run/samba.pid
+    ExecReload=/bin/kill -HUP $MAINPID
+
+    [Install]
+    WantedBy=multi-user.target
+
+#. Reload daemon and enable::
+
+    systemctl daemon-reload
+    systemctl enable samba-ad-dc
