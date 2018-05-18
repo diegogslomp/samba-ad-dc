@@ -33,21 +33,23 @@ samba-ad-dc-centos7-install
     
     ps ax | egrep 'samba|smbd|nmdb|winbindd'
 
+#. Create domain::
+   
+    samba-tool domain provision --use-rfc2307 --interactive
+    
 #. Copy generated krb5 file to /etc:: 
 
     mv /etc/krb5.conf /etc/krb5.conf.ORIG
     cp /usr/local/samba/private/krb5.conf /etc/
 
-#. Create domain::
-   
-    samba-tool domain provision --use-rfc2307 --interactive
 
 #. Disable firewal and network-manager ,static address::
 
     systemctl disable firewalld.service
+    systemctl disable NetworkManager
     systemctl stop firewalld.service 
     systemctl stop NetworkManager
-    systemctl disable NetworkManager
+
 
 #. TODO: Add NM_CONTROLLED="no" to ifcfg-enp0s3::
    
