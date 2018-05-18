@@ -4,7 +4,7 @@ samba-ad-dc-centos7-install
 #. Update and install shh epel bash-completion (Optional)::
    
     yum update -y
-    yum install openssh-server wget epel-release bash-completion -y
+    yum install wget epel-release bash-completion -y
 
 #. Samba dependences::
    
@@ -63,9 +63,8 @@ samba-ad-dc-centos7-install
    
     vim /etc/hosts
 
-#. Enable network after NetworkManager disabled::
+#. Restart network after NetworkManager disabled::
 
-    systemctl enable network
     systemctl restart network
 
 #. Start samba::
