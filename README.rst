@@ -6,11 +6,6 @@ Samba Active Directory Domain Controller install
 Centos7 install
 ---------------
 
-#. Update and install shh epel bash-completion (Optional)::
-   
-    yum update -y
-    yum install bash-completion epel-release vim wget -y
-
 #. Samba dependences::
    
     yum install attr bind-utils docbook-style-xsl gcc gdb krb5-workstation libsemanage-python libxslt perl perl-ExtUtils-MakeMaker perl-Parse-Yapp perl-Test-Base pkgconfig policycoreutils-python python-crypto gnutls-devel libattr-devel keyutils-libs-devel libacl-devel libaio-devel libblkid-devel libxml2-devel openldap-devel pam-devel popt-devel python-devel readline-devel zlib-devel systemd-devel -y
@@ -34,7 +29,7 @@ Centos7 install
    
     vim /root/.bash_profile 
 
-#. None of them must berunning::
+#. None of the services must be running::
     
     ps ax | egrep 'samba|smbd|nmdb|winbindd'
 
