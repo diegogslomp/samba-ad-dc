@@ -1,7 +1,7 @@
 samba-ad-dc
 ===========
 
-Samba Active Directory Domain Controller install
+Samba Active Directory Domain Controller install with dnsmasq cache
 
 Centos7 install
 ---------------
