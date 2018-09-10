@@ -1,7 +1,7 @@
 samba-ad-dc
 ===========
 
-Samba Active Directory Domain Controller install with dnsmasq cache
+Samba Active Directory Domain Controller install with Dnsmasq cache
 
 Centos7 install
 ---------------
@@ -100,10 +100,8 @@ Centos7 install
     systemctl enable samba-ad-dc
 
 
-Optional: Add DnsMasq
----------------------
-
-Add dns cache to samba4  (Samba Internal DNS Back End + Dnsmasq)
+Add DnsMasq Cache
+-----------------
 
 #. Create an interface to dnsmasq listen (Debian)::
 
