@@ -57,14 +57,15 @@ Centos7 install
     systemctl stop NetworkManager
 
 
-#. Disable the management of NetworkManager for the interface::
+#. Disable the interface management from NetworkManager::
 
     # /etc/sysconfig/network-scripts/ifcfg-enp0s3
     NM_CONTROLLED="no"
 
-#. Add the host itself as nameserver::
+#. Add search domain and the host itself as nameserver::
    
     # /etc/resolv.conf
+    search example.com
     nameserver <host_ip>
 
 #. Add host.domain to hosts file::
