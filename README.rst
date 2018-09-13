@@ -10,9 +10,13 @@ Centos7 install
    
     yum install attr bind-utils docbook-style-xsl gcc gdb krb5-workstation libsemanage-python libxslt perl perl-ExtUtils-MakeMaker perl-Parse-Yapp perl-Test-Base pkgconfig policycoreutils-python python-crypto gnutls-devel libattr-devel keyutils-libs-devel libacl-devel libaio-devel libblkid-devel libxml2-devel openldap-devel pam-devel popt-devel python-devel readline-devel zlib-devel systemd-devel -y
 
-#. TODO: Desabilitar SELinux (SELINUX=disabled):: 
+#. Disable SELinux:: 
 
-    vim /etc/selinux/config
+    # /etc/selinux/config
+    SELINUX=disabled
+    
+#. Disable for current session::
+    
     setenforce 0
     
 #. Download and install from source::
@@ -25,11 +29,13 @@ Centos7 install
     make -j 3
     make install
 
-#. TODO: Add /usr/local/samba/bin and sbin to PATH::
+#. Add samba bin/sbin to PATH::
    
-    vim /root/.bash_profile 
+    # /root/.bash_profile
+    ...
+    export PATH=/usr/local/samba/bin/:/usr/local/samba/sbin:$PATH 
 
-#. None of the services must be running::
+#. Check if none of the services are running::
     
     ps ax | egrep 'samba|smbd|nmdb|winbindd'
 
@@ -51,17 +57,21 @@ Centos7 install
     systemctl stop NetworkManager
 
 
-#. TODO: Add NM_CONTROLLED="no" to ifcfg-enp0s3::
-   
-    vim /etc/sysconfig/network-scripts/ifcfg-enp0s3
+#. Disable the management of NetworkManager for the interface::
 
-#. TODO: Add domain and nameservers::
-   
-    vim /etc/resolv.conf
+    # /etc/sysconfig/network-scripts/ifcfg-enp0s3
+    NM_CONTROLLED="no"
 
-#. TODO: Add host.domain::
+#. Add the host itself as nameserver::
    
-    vim /etc/hosts
+    # /etc/resolv.conf
+    nameserver <host_ip>
+
+#. Add host.domain to hosts file::
+
+    # /etc/hosts
+    127.0.0.1     localhost localhost.localdomain
+    <host_ip>     DC1.example.com     DC1
 
 #. Restart network after NetworkManager disabled::
 
@@ -79,8 +89,9 @@ Centos7 install
     klist
     /usr/local/samba/bin/wbinfo -u
     
-#. Create /etc/systemd/system/samba-ad-dc.service::
+#. Create systemctl service file::
 
+    # /etc/systemd/system/samba-ad-dc.service
     [Unit]
     Description=Samba Active Directory Domain Controller
     After=network.target remote-fs.target nss-lookup.target
