@@ -22,7 +22,7 @@ Centos7 install
 #. Download and install from source::
    
     cd /usr/local/src/
-    wget https://download.samba.org/pub/samba/stable/samba-4.8.2.tar.gz
+    wget https://download.samba.org/pub/samba/stable/samba-4.9.2.tar.gz
     tar zxvf samba-4.8.2.tar.gz 
     cd /usr/local/src/samba-4.8.2/
     ./configure
@@ -161,7 +161,9 @@ Add DnsMasq Cache
     [global]
     dns forwarder 127.0.0.5
     ...
-    interfaces = eth0 lo  
+    # Check which is the primary interface:
+    # ip a | grep '<BROADCAST' | awk -F ': ' '{print $2}'
+    interfaces = enp0s3 lo  
     bind interfaces only = yes 
     
 #. Restart dnsmasq and samba
