@@ -22,9 +22,9 @@ Centos7 install
 #. Download and install from source::
    
     cd /usr/local/src/
-    wget https://download.samba.org/pub/samba/stable/samba-4.9.2.tar.gz
-    tar zxvf samba-4.8.2.tar.gz 
-    cd /usr/local/src/samba-4.8.2/
+    wget https://download.samba.org/pub/samba/samba-latest.tar.gz
+    tar zxvf samba-latest.tar.gz
+    cd /usr/local/src/samba-latest/
     ./configure
     make -j 3
     make install
