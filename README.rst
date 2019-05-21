@@ -3,7 +3,7 @@ samba-ad-dc
 
 Creating samba container::
 
-    docker run --privileged --it --name samba diegogslomp/samba-ad-dc:4.9.8 bash
+    docker run --privileged -it --name samba diegogslomp/samba-ad-dc:4.9.8 bash
 
 Provisioning Samba AD in Non-interactive Mode::
 
