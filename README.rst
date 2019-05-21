@@ -18,39 +18,21 @@ samba-ad-dc
 
 #. Creating samba container::
 
-    docker run --privileged -it -p 139:139 -p 445:445 -p 389:389 \
+    docker run --privileged -d -p 139:139 -p 445:445 -p 389:389 \
     --network samba --ip 10.99.0.1 --hostname DC1 \
     --add-host "localhost.localdomain:127.0.0.1" \
     --add-host "DC1.samdom.example.com:10.99.0.1" \
-    --name samba diegogslomp/samba-ad-dc:4.9.8 bash
-
-#. Provisioning Samba AD in Non-interactive Mode::
-
-    samba-tool domain provision \
-    --server-role=dc --use-rfc2307 --dns-backend=SAMBA_INTERNAL \
-    --realm=SAMDOM.EXAMPLE.COM --domain=SAMDOM --adminpass=Passw0rd \
-    --option="dns forwarder=8.8.8.8"
-
-#. Configuring Kerberos and DNS Resolver::
-
-    cat /usr/local/samba/private/krb5.conf > /etc/krb5.conf
-    echo -e "namerserver 10.99.0.1\nsearch samdom.example.com" > /etc/resolv.conf
-
-#. Starting Samba Service::
-
-    samba
+    --name samba diegogslomp/samba-ad-dc:4.9.8
 
 #. Testing::
 
-    testparm
-    smbclient -L localhost -U%
-    smbclient //localhost/netlogon -UAdministrator -c 'ls'
-    nslookup DC1.samdom.example.com
-    host -t SRV _ldap._tcp.samdom.example.com
-    kinit administrator
-    klist
-    /usr/local/samba/bin/wbinfo -u
-
-#. Type `Ctrl-p + Ctrl-q` to detach the tty without exiting the shell
+    docker exec -it samba testparm
+    docker exec -it samba smbclient -L localhost -U%
+    docker exec -it samba smbclient //localhost/netlogon -UAdministrator -c 'ls'
+    docker exec -it samba nslookup DC1.samdom.example.com
+    docker exec -it samba host -t SRV _ldap._tcp.samdom.example.com
+    docker exec -it samba kinit administrator
+    docker exec -it samba klist
+    docker exec -it samba /usr/local/samba/bin/wbinfo -u
 
 #. Official site: https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_Domain_Controller

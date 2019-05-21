@@ -26,6 +26,8 @@ RUN ./configure && \
 
 ENV PATH "/usr/local/samba/bin:/usr/local/samba/sbin:$PATH"
 
-CMD samba-tool
+COPY ./domain-provision.sh /usr/local/src/samba/domain-provision
+
+CMD ./domain-provision
 
 EXPOSE 137/udp 138/udp 139 445
