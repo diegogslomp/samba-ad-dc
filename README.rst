@@ -12,14 +12,14 @@ Provisioning Samba AD in Non-interactive Mode::
 
 Configuring Kerberos::
 
-    cp /usr/local/samba/private/krb5.conf /etc/
+    cp -uf /usr/local/samba/private/krb5.conf /etc/
     
 Configuring the DNS Resolver::
 
     IP=$(ip a | grep 'scope global' | awk '{print $2}' | awk -F '/' '{print $1}')
     cat /etc/resolv.conf > ~/etc/resolv.conf.new
     echo -e "namerserver $IP\nsearch samdom.example.com\n" > ~/resolv.conf.new
-    cp -f ~/resolv.conf.new /etc/resolv.conf
+    cp -uf ~/resolv.conf.new /etc/resolv.conf
 
 Verifying::
 
