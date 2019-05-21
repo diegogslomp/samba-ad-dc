@@ -1,7 +1,7 @@
 samba-ad-dc
 ===========
 
-AD Settings::
+#. AD Settings::
 
     Server role: dc
     NIS extensions enabled
@@ -9,13 +9,14 @@ AD Settings::
     Kerberos realm and AD DNS zone: samdom.example.com
     NetBIOS domain name: SAMDOM
     Domain administrator password: Passw0rd
+    DNS Forwarder: 8.8.8.8
 
-Creating docker network::
+#. Creating docker network::
 
     docker network create --driver=bridge --subnet=10.99.0.0/16 \
     --ip-range=10.99.0.0/24 --gateway 10.99.0.254 samba
 
-Creating samba container::
+#. Creating samba container::
 
     docker run --privileged -it --rm \
     --network samba --ip 10.99.0.1 --hostname DC01 \
@@ -23,17 +24,17 @@ Creating samba container::
     --add-host "DC01.samdom.example.com:10.99.0.1" \
     --name samba diegogslomp/samba-ad-dc:4.9.8 bash
 
-Provisioning Samba AD in Non-interactive Mode::
+#. Provisioning Samba AD in Non-interactive Mode::
 
     samba-tool domain provision --server-role=dc --use-rfc2307 --dns-backend=SAMBA_INTERNAL \
-    --realm=SAMDOM.EXAMPLE.COM --domain=SAMDOM --adminpass=Passw0rd
+    --realm=SAMDOM.EXAMPLE.COM --domain=SAMDOM --adminpass=Passw0rd --option="dns forwarder=8.8.8.8"
 
-Configuring Kerberos and DNS Resolver::
+#. Configuring Kerberos and DNS Resolver::
 
     cat /usr/local/samba/private/krb5.conf > /etc/krb5.conf
     echo -e "namerserver 10.99.0.1\nsearch samdom.example.com" > /etc/resolv.conf
     
-Testing::
+#. Testing::
 
     samba
     testparm
@@ -45,4 +46,4 @@ Testing::
     klist
     /usr/local/samba/bin/wbinfo -u
     
-Official site: https://wiki.samba.org/index.php/User_Documentation
+#. Official site: https://wiki.samba.org/index.php/User_Documentation
