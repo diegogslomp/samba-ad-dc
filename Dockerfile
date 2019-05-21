@@ -26,6 +26,6 @@ RUN ./configure && \
 
 ENV PATH "/usr/local/samba/bin:/usr/local/samba/sbin:$PATH"
 
-CMD samba-tool -h
+CMD samba-tool
 
 EXPOSE 137/udp 138/udp 139 445

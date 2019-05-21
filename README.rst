@@ -1,20 +1,26 @@
 samba-ad-dc
 ===========
 
-samba-tool -h::
+::
 
-    docker run --rm --name samba diegogslomp/samba-ad-dc:4.9.8
+    docker run --privileged --it --name samba diegogslomp/samba-ad-dc:4.9.8 bash
 
-TODO domain provision::
+#. Provisioning Samba AD in Non-interactive Mode::
 
     samba-tool domain provision --server-role=dc --use-rfc2307 --dns-backend=SAMBA_INTERNAL \
     --realm=SAMDOM.EXAMPLE.COM --domain=SAMDOM --adminpass=Passw0rd
 
-    mv /etc/krb5.conf /etc/krb5.conf.ORIG
+#. Configuring Kerberos::
+
     cp /usr/local/samba/private/krb5.conf /etc/
     
+#. Configuring the DNS Resolver::
 
-TODO tests::
+    IP=$(ip a | grep 'scope global' | awk '{print $2}' | awk -F '/' '{print $1}')
+    sed -i '1s/^/nameserver $IP\n/' /etc/resolv.conf
+    sed -i '1s/^/search samdom.example.com\n/' /etc/resolv.conf
+
+Testing::
     
     smbclient -L localhost -U%
     host -t SRV _ldap._example.com
@@ -22,6 +28,4 @@ TODO tests::
     klist
     /usr/local/samba/bin/wbinfo -u
     
-Local install and DNS Cache: https://github.com/diegogslomp/samba-ad-dc/blob/master/local-install-and-dns-cache.rst
-
 Official site: https://wiki.samba.org/index.php/User_Documentation
