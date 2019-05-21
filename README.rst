@@ -17,8 +17,8 @@ Configuring Kerberos::
 Configuring the DNS Resolver::
 
     IP=$(ip a | grep 'scope global' | awk '{print $2}' | awk -F '/' '{print $1}')
-    sed -i "1s/^/nameserver $IP\n/" /etc/resolv.conf
-    sed -i "1s/^/search samdom.example.com\n/" /etc/resolv.conf
+    echo -e "namerserver $IP\nsearch samdom.example.com\n" ~/etc/resolv.conf.new
+    cp -f ~/resolv.conf.new /etc/resolv.conf
 
 Verifying::
 
