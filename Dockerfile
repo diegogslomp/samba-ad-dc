@@ -1,6 +1,6 @@
 FROM centos:7
 
-RUN yum install epel-release -y 
+RUN yum install epel-release -y
 RUN yum install wget attr bind-utils \
         docbook-style-xsl gcc gdb krb5-workstation \
         libsemanage-python libxslt perl perl-ExtUtils-MakeMaker \
