@@ -18,7 +18,7 @@ samba-ad-dc
 
 #. Creating samba container::
 
-    docker run --privileged -it --rm \
+    docker run --privileged -it -p 139:139 -p 445:445 \
     --network samba --ip 10.99.0.1 --hostname DC01 \
     --add-host "localhost.localdomain:127.0.0.1" \
     --add-host "DC01.samdom.example.com:10.99.0.1" \
@@ -26,17 +26,22 @@ samba-ad-dc
 
 #. Provisioning Samba AD in Non-interactive Mode::
 
-    samba-tool domain provision --server-role=dc --use-rfc2307 --dns-backend=SAMBA_INTERNAL \
-    --realm=SAMDOM.EXAMPLE.COM --domain=SAMDOM --adminpass=Passw0rd --option="dns forwarder=8.8.8.8"
+    samba-tool domain provision \
+    --server-role=dc --use-rfc2307 --dns-backend=SAMBA_INTERNAL \
+    --realm=SAMDOM.EXAMPLE.COM --domain=SAMDOM --adminpass=Passw0rd \
+    --option="dns forwarder=8.8.8.8"
 
 #. Configuring Kerberos and DNS Resolver::
 
     cat /usr/local/samba/private/krb5.conf > /etc/krb5.conf
     echo -e "namerserver 10.99.0.1\nsearch samdom.example.com" > /etc/resolv.conf
-    
-#. Testing::
+
+#. Starting Samba Service::
 
     samba
+
+#. Testing::
+
     testparm
     smbclient -L localhost -U%
     smbclient //localhost/netlogon -UAdministrator -c 'ls'
@@ -45,5 +50,7 @@ samba-ad-dc
     kinit administrator
     klist
     /usr/local/samba/bin/wbinfo -u
-    
+
+#. Type `Ctrl-p + Ctrl-q` to detach the tty without exiting the shell
+
 #. Official site: https://wiki.samba.org/index.php/User_Documentation
