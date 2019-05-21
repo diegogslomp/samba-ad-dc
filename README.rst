@@ -18,10 +18,10 @@ samba-ad-dc
 
 #. Creating samba container::
 
-    docker run --privileged -it -p 139:139 -p 445:445 \
-    --network samba --ip 10.99.0.1 --hostname DC01 \
+    docker run --privileged -it -p 139:139 -p 445:445 -p 389:389 \
+    --network samba --ip 10.99.0.1 --hostname DC1 \
     --add-host "localhost.localdomain:127.0.0.1" \
-    --add-host "DC01.samdom.example.com:10.99.0.1" \
+    --add-host "DC1.samdom.example.com:10.99.0.1" \
     --name samba diegogslomp/samba-ad-dc:4.9.8 bash
 
 #. Provisioning Samba AD in Non-interactive Mode::
@@ -45,7 +45,7 @@ samba-ad-dc
     testparm
     smbclient -L localhost -U%
     smbclient //localhost/netlogon -UAdministrator -c 'ls'
-    nslookup DC01.samdom.example.com
+    nslookup DC1.samdom.example.com
     host -t SRV _ldap._tcp.samdom.example.com
     kinit administrator
     klist
