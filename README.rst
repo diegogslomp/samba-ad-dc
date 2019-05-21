@@ -20,6 +20,10 @@ Configuring the DNS Resolver::
     sed -i "1s/^/nameserver $IP\n/" /etc/resolv.conf
     sed -i "1s/^/search samdom.example.com\n/" /etc/resolv.conf
 
+Verifying::
+
+    samba
+    
 Testing::
     
     smbclient -L localhost -U%
