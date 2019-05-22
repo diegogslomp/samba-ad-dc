@@ -18,14 +18,25 @@ samba-ad-dc
 
 #. Creating samba container::
 
-    docker run --privileged -d -p 139:139 -p 445:445 -p 389:389 \
-    --network samba --ip 10.99.0.1 --hostname DC1 \
+    docker run --privileged -d \
+    --network samba \
+    --ip 10.99.0.1 \
+    --hostname DC1 \
     --add-host "localhost.localdomain:127.0.0.1" \
     --add-host "DC1.samdom.example.com:10.99.0.1" \
-    --name samba diegogslomp/samba-ad-dc:4.9.8
+    -e "SERVER_IP=10.99.0.1" \
+    -e "SERVER_ROLE=dc" \
+    -e "DNS_BACKEND=SAMBA_INTERNAL" \
+    -e "REALM=SAMDOM.EXAMPLE.COM" \
+    -e "SEARCH_DOMAIN=samdom.example.com" \
+    -e "DOMAIN=SAMDOM" \
+    -e "ADMIN_MASS=Passw0rd" \
+    -e "DNS_FORWARDER=8.8.8.8" \
+    --name samba diegogslomp/samba-ad-dc
 
 #. Testing::
 
+    docker exec -it samba samba --version
     docker exec -it samba testparm
     docker exec -it samba smbclient -L localhost -U%
     docker exec -it samba smbclient //localhost/netlogon -UAdministrator -c 'ls'
