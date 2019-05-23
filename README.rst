@@ -3,13 +3,15 @@ samba-ad-dc
 
 #. AD Settings::
 
-    Server role: dc
-    NIS extensions enabled
-    Internal DNS back end
-    Kerberos realm and AD DNS zone: samdom.example.com
-    NetBIOS domain name: SAMDOM
-    Domain administrator password: Passw0rd
-    DNS Forwarder: 8.8.8.8
+    SERVER_IP=10.99.0.1
+    SERVER_ROLE=dc
+    SERVER_HOSTNAME=DC1
+    DNS_BACKEND=SAMBA_INTERNAL
+    REALM=SAMDOM.EXAMPLE.COM
+    SEARCH_DOMAIN=samdom.example.com
+    DOMAIN=SAMDOM
+    ADMIN_MASS=Passw0rd
+    DNS_FORWARDER=8.8.8.8
 
 #. Creating docker network::
 
@@ -20,18 +22,18 @@ samba-ad-dc
 
     docker run --privileged -d \
     --network samba \
-    --ip 10.99.0.1 \
-    --hostname DC1 \
+    --ip "${SERVER_IP}" \
+    --hostname "${SERVER_HOSTNAME}" \
     --add-host "localhost.localdomain:127.0.0.1" \
-    --add-host "DC1.samdom.example.com:10.99.0.1" \
-    -e "SERVER_IP=10.99.0.1" \
-    -e "SERVER_ROLE=dc" \
-    -e "DNS_BACKEND=SAMBA_INTERNAL" \
-    -e "REALM=SAMDOM.EXAMPLE.COM" \
-    -e "SEARCH_DOMAIN=samdom.example.com" \
-    -e "DOMAIN=SAMDOM" \
-    -e "ADMIN_MASS=Passw0rd" \
-    -e "DNS_FORWARDER=8.8.8.8" \
+    --add-host "${SERVER_HOSTNAME}.samdom.example.com:${SERVER_IP}" \
+    -e "SERVER_IP=${SERVER_IP}" \
+    -e "SERVER_ROLE=${SERVER_ROLE}" \
+    -e "DNS_BACKEND=${DNS_BACKEND}" \
+    -e "REALM=${REALM}" \
+    -e "SEARCH_DOMAIN=${SEARCH_DOMAIN}" \
+    -e "DOMAIN=${DOMAIN}" \
+    -e "ADMIN_MASS=${ADMIN_MASS}" \
+    -e "DNS_FORWARDER=${DNS_FORWARDER}" \
     --name samba diegogslomp/samba-ad-dc
 
 #. Testing::
