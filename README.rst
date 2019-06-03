@@ -10,7 +10,7 @@ samba-ad-dc
     REALM=SAMDOM.EXAMPLE.COM
     SEARCH_DOMAIN=samdom.example.com
     DOMAIN=SAMDOM
-    ADMIN_MASS=Passw0rd
+    ADMIN_PASS=Passw0rd
     DNS_FORWARDER=8.8.8.8
 
 #. Creating docker network::
@@ -32,7 +32,7 @@ samba-ad-dc
     -e "REALM=${REALM}" \
     -e "SEARCH_DOMAIN=${SEARCH_DOMAIN}" \
     -e "DOMAIN=${DOMAIN}" \
-    -e "ADMIN_MASS=${ADMIN_MASS}" \
+    -e "ADMIN_PASS=${ADMIN_PASS}" \
     -e "DNS_FORWARDER=${DNS_FORWARDER}" \
     --name samba diegogslomp/samba-ad-dc
 
