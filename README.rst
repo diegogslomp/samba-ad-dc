@@ -1,7 +1,7 @@
 samba-ad-dc
 ===========
 
-#. AD Settings::
+#. Active Directory Settings::
 
     SERVER_IP=10.99.0.1
     SERVER_ROLE=dc
@@ -13,12 +13,12 @@ samba-ad-dc
     ADMIN_PASS=Passw0rd
     DNS_FORWARDER=8.8.8.8
 
-#. Creating docker network::
+#. Create docker network::
 
     docker network create --driver=bridge --subnet=10.99.0.0/16 \
     --ip-range=10.99.0.0/24 --gateway 10.99.0.254 samba
 
-#. Creating samba container::
+#. Create samba container::
 
     docker run --privileged -d \
     --network samba \
@@ -36,7 +36,7 @@ samba-ad-dc
     -e "DNS_FORWARDER=${DNS_FORWARDER}" \
     --name samba diegogslomp/samba-ad-dc
 
-#. Testing::
+#. Tests::
 
     docker exec -it samba samba --version
     docker exec -it samba testparm
