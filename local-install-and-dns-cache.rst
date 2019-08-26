@@ -143,10 +143,10 @@ Add DnsMasq Cache
     # OpenDNS as example
     nameserver 208.67.222.222
 
-#. Install dnsmasq and restrict to only listen on IP 127.0.0.5::
+#. Install dnsmasq and restrict to only listen on the new loopback interface::
     
     # /etc/dnsmasq.conf
-    listen-address=127.0.0.5
+    interface=lo:0
     bind-interfaces
     no-hosts
     resolv-file=/etc/dnsmasq.resolv
