@@ -1,7 +1,7 @@
 samba-ad-dc
 ===========
 
-#. Active Directory Settings::
+#. Active Directory environment variables::
 
     SERVER_IP=10.99.0.1
     SERVER_ROLE=dc
@@ -13,7 +13,7 @@ samba-ad-dc
     ADMIN_PASS=Passw0rd
     DNS_FORWARDER=8.8.8.8
 
-#. Create docker network::
+#. Create docker network for static IP assign::
 
     docker network create --driver=bridge --subnet=10.99.0.0/16 \
     --ip-range=10.99.0.0/24 --gateway 10.99.0.254 samba
