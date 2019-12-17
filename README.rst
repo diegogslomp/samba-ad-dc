@@ -22,19 +22,11 @@ samba-ad-dc
 
     docker run --privileged -d \
     --network samba \
-    --ip "${SERVER_IP}" \
-    --hostname "${SERVER_HOSTNAME}" \
+    --ip 10.99.0.1 \
+    --hostname DC1 \
     --add-host "localhost.localdomain:127.0.0.1" \
-    --add-host "${SERVER_HOSTNAME}.samdom.example.com:${SERVER_IP}" \
-    -e "SERVER_IP=${SERVER_IP}" \
-    -e "SERVER_ROLE=${SERVER_ROLE}" \
-    -e "DNS_BACKEND=${DNS_BACKEND}" \
-    -e "REALM=${REALM}" \
-    -e "SEARCH_DOMAIN=${SEARCH_DOMAIN}" \
-    -e "DOMAIN=${DOMAIN}" \
-    -e "ADMIN_PASS=${ADMIN_PASS}" \
-    -e "DNS_FORWARDER=${DNS_FORWARDER}" \
-    --name samba diegogslomp/samba-ad-dc
+    --add-host "DC1.samdom.example.com:10.99.0.1" \
+    --name samba samba-ad-dc
 
 #. Tests::
 
@@ -49,3 +41,5 @@ samba-ad-dc
     docker exec -it samba /usr/local/samba/bin/wbinfo -u
 
 #. Official site: https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_Domain_Controller
+
+#. Dependencies: https://wiki.samba.org/index.php/Package_Dependencies_Required_to_Build_Samba

@@ -2,7 +2,7 @@
 
 samba-tool domain provision \
   --server-role=${SERVER_ROLE} --use-rfc2307 --dns-backend=${DNS_BACKEND} \
-  --realm=${REALM} --domain=${DOMAIN} --adminpass=${ADMIN_MASS} \
+  --realm=${REALM} --domain=${DOMAIN} --adminpass=${ADMIN_PASS} \
   --option="dns forwarder=${DNS_FORWARDER}"
 
 if ! grep -q ${DOMAIN} /etc/krb5.conf > /dev/null 2>&1; then
