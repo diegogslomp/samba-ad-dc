@@ -26,7 +26,7 @@ samba-ad-dc
     --hostname DC1 \
     --add-host "localhost.localdomain:127.0.0.1" \
     --add-host "DC1.samdom.example.com:10.99.0.1" \
-    --name samba samba-ad-dc
+    --name samba diegogslomp/samba-ad-dc
 
 #. Tests::
 
