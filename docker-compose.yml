@@ -1,0 +1,14 @@
+version: "3.1"
+
+services:
+  dc:
+    image: diegogslomp/samba-ad-dc
+    build: .
+    hostname: DC1
+    privileged: true
+    environment:
+      SMB_VERSION: latest
+      REALM: SAMDOM.EXAMPLE.COM
+      SEARCH_DOMAIN: samdom.example.com
+      DOMAIN: SAMDOM
+      ADMIN_PASS: Passw0rd
