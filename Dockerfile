@@ -44,6 +44,8 @@ RUN ./configure && \
 WORKDIR /usr/local/samba/sbin
 COPY provision-and-start.sh provision-and-start
 RUN chmod +x provision-and-start
+COPY samba-tests.sh samba-tests
+RUN chmod +x samba-tests
 
 CMD provision-and-start
 EXPOSE 137/udp 138/udp 139 445
