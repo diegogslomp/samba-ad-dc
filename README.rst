@@ -5,7 +5,6 @@ Run docker container::
 
     docker run -d --privileged --hostname DC1 --name dc1 diegogslomp/samba-ad-dc
     docker exec -it dc1 samba-tests
-    # ADMIN_PASS Passw0rd
 
 Or clone, build and run with docker-compose::
 
