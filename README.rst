@@ -3,7 +3,7 @@ samba-ad-dc
 
 Run docker container::
 
-    docker run -d --privileged --hostname DC1 --name dc1 diegogslomp/samba-ad-dc
+    docker run --privileged --hostname DC1 --name dc1 diegogslomp/samba-ad-dc
     docker exec -it dc1 samba-tests
 
 Or clone, build and run with docker-compose::
