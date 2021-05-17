@@ -3,7 +3,7 @@ FROM centos:8
 RUN yum update -y
 RUN yum install epel-release -y
 RUN yum install dnf-plugins-core -y
-RUN yum config-manager --set-enabled PowerTools
+RUN yum config-manager --set-enabled powertools
 
 RUN yum install docbook-style-xsl gcc gdb gnutls-devel gpgme-devel jansson-devel \
   keyutils-libs-devel krb5-workstation libacl-devel libaio-devel \
@@ -11,7 +11,7 @@ RUN yum install docbook-style-xsl gcc gdb gnutls-devel gpgme-devel jansson-devel
   libxml2-devel libxslt lmdb-devel openldap-devel pam-devel perl \
   perl-ExtUtils-MakeMaker perl-Parse-Yapp popt-devel python3-cryptography \
   python3-dns python3-gpg python36-devel readline-devel rpcgen systemd-devel \
-  tar zlib-devel bind-utils -y && \
+  tar zlib-devel bind-utils flex dbus-devel libtirpc-devel python3-markdown -y && \
   yum clean all
 
 ENV SMB_VERSION latest
