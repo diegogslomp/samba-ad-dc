@@ -2,20 +2,22 @@
 
 Samba4 Active Directory Domain Controller Docker Image
 
-Copy `docker-compose.yml` file, edit it and run:
+Copy and edit `docker-compose.yml`:
 ```
 mkdir samba-ad-dc && cd samba-ad-dc
 curl https://raw.githubusercontent.com/diegogslomp/samba-ad-dc/master/docker-compose.yml \
 --output docker-compose.yml
-docker-compose up -d
-docker-compose exec dc1 samba-tests
 ```
 
-Or build docker image with latest samba version:
+Or clone this repo and build latest samba:
 ```
 git clone https://github.com/diegogslomp/samba-ad-dc
 cd samba-ad-dc
 docker build --tag diegogslomp/samba-ad-dc .
+```
+
+Finally, run samba service and tests:
+```
 docker-compose up -d
 docker-compose exec dc1 samba-tests
 ```
