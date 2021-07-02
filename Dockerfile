@@ -16,14 +16,6 @@ RUN yum install docbook-style-xsl gcc gdb gnutls-devel gpgme-devel jansson-devel
 
 ENV SMB_VERSION latest
 
-ENV SERVER_ROLE dc
-ENV DNS_BACKEND SAMBA_INTERNAL
-ENV REALM SAMDOM.EXAMPLE.COM
-ENV SEARCH_DOMAIN samdom.example.com
-ENV DOMAIN SAMDOM
-ENV ADMIN_PASS Passw0rd
-ENV DNS_FORWARDER 8.8.8.8
-
 ENV PATH /usr/local/samba/bin:/usr/local/samba/sbin:$PATH
 
 ENV LC_CTYPE C.UTF-8
