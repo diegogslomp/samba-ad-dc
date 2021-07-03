@@ -5,8 +5,9 @@ Samba4 Active Directory Domain Controller Docker Image
 Copy and edit `docker-compose.yml`:
 ```
 mkdir samba-ad-dc && cd samba-ad-dc
-curl https://raw.githubusercontent.com/diegogslomp/samba-ad-dc/master/docker-compose.yml \
---output docker-compose.yml
+curl -o docker-compose.yml \
+https://raw.githubusercontent.com/diegogslomp/samba-ad-dc/master/docker-compose.yml
+
 ```
 
 Or clone this repo and build latest samba:
