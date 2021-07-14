@@ -17,7 +17,7 @@ cd samba-ad-dc
 docker build --tag diegogslomp/samba-ad-dc .
 ```
 
-Finally, run samba service and tests:
+Run samba service and tests:
 ```
 docker-compose up -d
 docker-compose exec dc1 samba-tests
