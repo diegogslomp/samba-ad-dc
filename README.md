@@ -14,13 +14,13 @@ Or clone this repo and build latest samba:
 ```
 git clone https://github.com/diegogslomp/samba-ad-dc
 cd samba-ad-dc
-docker build --tag diegogslomp/samba-ad-dc .
+docker build --no-cache --tag diegogslomp/samba-ad-dc .
 ```
 
-Run samba service and tests:
+Run domain provision, start samba daemon and test it:
 ```
 docker-compose up -d
-docker-compose exec dc1 samba-tests
+docker-compose exec samba-ad-dc_dc1_1 samba-tests
 ```
 
 Official site: https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_Domain_Controller

@@ -13,3 +13,13 @@ services:
       DNS_FORWARDER: 8.8.8.8
       SERVER_ROLE: dc
       DNS_BACKEND: SAMBA_INTERNAL
+    volumes:
+      - samba:/usr/local/samba
+    ports:
+      - 137:137/udp
+      - 138:138/udp
+      - 139:139
+      - 445:445
+
+volumes:
+  samba:

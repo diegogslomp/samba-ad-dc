@@ -31,7 +31,8 @@ RUN curl -O https://download.samba.org/pub/samba/samba-$SMB_VERSION.tar.gz && \
 WORKDIR /usr/local/src/samba/
 RUN ./configure && \
   make -j 3 && \
-  make install
+  make install && \
+  rm -rf /usr/local/src/samba
 
 WORKDIR /usr/local/samba/sbin
 COPY provision-and-start.sh provision-and-start
