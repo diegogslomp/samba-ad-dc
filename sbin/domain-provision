@@ -1,4 +1,6 @@
 #!/bin/sh
+# Exit if any error
+set -e
 
 samba-tool domain provision \
   --server-role=${SERVER_ROLE} --use-rfc2307 --dns-backend=${DNS_BACKEND} \
@@ -13,5 +15,3 @@ echo -e "namerserver ${SERVER_IP}\nsearch ${SEARCH_DOMAIN}" > /etc/resolv.conf
 
 echo -e "127.0.0.1 localhost localhost.localdomain" > /etc/hosts
 echo -e "${SERVER_IP} $(hostname).${SEARCH_DOMAIN} $(hostname)" >> /etc/hosts
-
-samba -F

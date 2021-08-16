@@ -1,4 +1,5 @@
 #!/bin/sh
+# Exit if any error, display cmd
 set -ex
 
 samba --version

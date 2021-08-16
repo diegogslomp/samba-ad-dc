@@ -1,0 +1,17 @@
+version: "3.1"
+
+services:
+  dc1:
+    environment:
+      REALM: DGS.NET
+      SEARCH_DOMAIN: dgs.net
+      DOMAIN: DGS
+    command: tail -f /dev/null
+    volumes:
+      - backups:/backups
+      - sbin:/usr/local/sbin
+    ports:
+      - 137:137/udp
+      - 138:138/udp
+      - 139:139
+      - 445:445

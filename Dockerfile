@@ -34,11 +34,8 @@ RUN ./configure && \
   make install && \
   rm -rf /usr/local/src/samba
 
-WORKDIR /usr/local/samba/sbin
-COPY provision-and-start.sh provision-and-start
-RUN chmod +x provision-and-start
-COPY samba-tests.sh samba-tests
-RUN chmod +x samba-tests
+WORKDIR /usr/local/sbin
+COPY sbin/* ./
 
-CMD provision-and-start
+CMD domain-provision && samba -F
 EXPOSE 137/udp 138/udp 139 445
