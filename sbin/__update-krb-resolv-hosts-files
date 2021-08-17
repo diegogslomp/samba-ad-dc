@@ -1,8 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 # Exit if any error
 set -e
 
-cat /usr/local/samba/private/krb5.conf > /etc/krb5.conf
+# krb5 file compiled and from mirror has different location
+KRB5_FROM_MIRROR='/var/lib/samba/private/krb5.conf'
+KRB5_COMPILED='/usr/local/samba/private/krb5.conf'
+[ -f ${KRB5_FROM_MIRROR} ] && cat ${KRB5_FROM_MIRROR} > /etc/krb5.conf
+[ -f ${KRB5_COMPILED} ] && cat ${KRB5_COMPILED} > /etc/krb5.conf
 
 SERVER_IP=$(ip a | grep 'scope global' | awk '{print $2}' | awk -F / '{print $1}')
 
