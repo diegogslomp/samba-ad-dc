@@ -2,7 +2,7 @@
 # Exit if any error
 set -e
 
-# krb5 file compiled and from mirror has different location
+# The krb5.conf location is different from mirror and compiled from source files
 KRB5_FROM_MIRROR='/var/lib/samba/private/krb5.conf'
 KRB5_COMPILED='/usr/local/samba/private/krb5.conf'
 [ -f ${KRB5_FROM_MIRROR} ] && cat ${KRB5_FROM_MIRROR} > /etc/krb5.conf
