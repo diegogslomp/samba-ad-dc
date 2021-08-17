@@ -6,6 +6,7 @@ services:
       REALM: DGS.NET
       SEARCH_DOMAIN: dgs.net
       DOMAIN: DGS
+    command: bash -c "samba-domain-provision && samba -F"
     volumes:
       - ./sbin:/usr/local/sbin
 
@@ -21,6 +22,6 @@ services:
       DNS_FORWARDER: 8.8.8.8
       SERVER_ROLE: dc
       DNS_BACKEND: SAMBA_INTERNAL
-    command: tail -f /dev/null
+    command: bash -c "samba-domain-join && samba -F"
     volumes:
       - ./sbin:/usr/local/sbin
