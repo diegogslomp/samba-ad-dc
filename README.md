@@ -19,8 +19,8 @@ docker build --no-cache --tag diegogslomp/samba-ad-dc .
 cp docker-compose.override_.yml docker-compose.override.yml
 docker-compose up -d dc1 && docker-compose logs -f
 docker-compose up -d dc2 && docker-compose logs -f
-docker-compose up -d dc1 && samba-tests
-docker-compose up -d dc2 && samba-tests
+docker-compose exec samba-ad-dc_dc1_1 samba-tests
+docker-compose exec samba-ad-dc_dc2_1 samba-tests
 ```
 
 Official site: https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_Domain_Controller
