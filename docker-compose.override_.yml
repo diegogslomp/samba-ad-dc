@@ -6,12 +6,21 @@ services:
       REALM: DGS.NET
       SEARCH_DOMAIN: dgs.net
       DOMAIN: DGS
+    volumes:
+      - ./sbin:/usr/local/sbin
+
+  dc2:
+    image: diegogslomp/samba-ad-dc
+    hostname: DC2
+    privileged: true
+    environment:
+      REALM: DGS.NET
+      SEARCH_DOMAIN: dgs.net
+      DOMAIN: DGS
+      ADMIN_PASS: Passw0rd
+      DNS_FORWARDER: 8.8.8.8
+      SERVER_ROLE: dc
+      DNS_BACKEND: SAMBA_INTERNAL
     command: tail -f /dev/null
     volumes:
-      - ./backups:/backups
       - ./sbin:/usr/local/sbin
-    ports:
-      - 137:137/udp
-      - 138:138/udp
-      - 139:139
-      - 445:445      
