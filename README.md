@@ -17,7 +17,7 @@ Or clone this repo, build images and run:
 ```
 git clone https://github.com/diegogslomp/samba-ad-dc
 cd samba-ad-dc
-docker build --no-cache --tag diegogslomp/samba-ad-dc .
+docker build --no-cache --tag diegogslomp/samba-ad-dc:centos -f Dockerfile .
 docker build --no-cache --tag diegogslomp/samba-ad-dc:ubuntu -f Dockerfile.ubuntu .
 cp docker-compose.override_.yml docker-compose.override.yml
 docker-compose up -d dc1 && docker-compose logs -f

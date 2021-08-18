@@ -2,6 +2,7 @@ version: "3.1"
 
 services:
   dc1:
+    image: diegogslomp/samba-ad-dc:centos
     environment:
       REALM: DGS.NET
       SEARCH_DOMAIN: dgs.net
