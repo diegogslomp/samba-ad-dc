@@ -3,6 +3,7 @@
 Samba Active Directory Domain Controller Docker Image
 
 Create a folder, copy/edit `docker-compose.yml` and run:
+
 ```
 mkdir samba-ad-dc && cd samba-ad-dc
 curl -o docker-compose.yml \
@@ -11,11 +12,13 @@ docker-compose up -d
 docker-compose exec samba-ad-dc_dc1_1 samba-tests
 ```
 
-Or clone this repo, build the image and run it:
+Or clone this repo, build images and run:
+
 ```
 git clone https://github.com/diegogslomp/samba-ad-dc
 cd samba-ad-dc
 docker build --no-cache --tag diegogslomp/samba-ad-dc .
+docker build --no-cache --tag diegogslomp/samba-ad-dc:ubuntu -f Dockerfile.ubuntu .
 cp docker-compose.override_.yml docker-compose.override.yml
 docker-compose up -d dc1 && docker-compose logs -f
 docker-compose up -d dc2 && docker-compose logs -f

@@ -9,9 +9,9 @@ services:
     command: bash -c "samba-domain-provision && samba -F"
     volumes:
       - ./sbin:/usr/local/sbin
-
+      - dc1:/usr/local/samba
   dc2:
-    image: diegogslomp/samba-ad-dc
+    image: diegogslomp/samba-ad-dc:ubuntu
     hostname: DC2
     privileged: true
     environment:
@@ -25,3 +25,8 @@ services:
     command: bash -c "samba-domain-join && samba -F"
     volumes:
       - ./sbin:/usr/local/sbin
+      - dc2:/var/lib/samba
+
+volumes:
+  dc1:
+  dc2:

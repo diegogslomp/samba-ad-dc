@@ -8,7 +8,7 @@ RUN apt update && apt upgrade -y && \
     apt autoremove -y
 
 RUN mv /etc/samba/smb.conf /etc/samba/smb.ORIG.conf
-COPY sbin/ /usr/local/
 
+COPY sbin /usr/local/sbin
 CMD bash -c "samba-domain-provision && samba -F"
 EXPOSE 137/udp 138/udp 139 445

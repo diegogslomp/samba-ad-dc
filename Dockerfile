@@ -34,8 +34,6 @@ RUN ./configure && \
   make install && \
   rm -rf /usr/local/src/samba
 
-WORKDIR /usr/local/sbin
-COPY sbin/* ./
-
+COPY sbin /usr/local/sbin
 CMD bash -c "samba-domain-provision && samba -F"
 EXPOSE 137/udp 138/udp 139 445
