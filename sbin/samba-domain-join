@@ -4,9 +4,9 @@ set -e
 
 samba-tool domain join ${REALM} ${SERVER_ROLE} \
   --server=dc1 \
-  -U administrator \
+  --username=administrator \
   --password=${ADMIN_PASS} \
   --dns-backend=${DNS_BACKEND} \
   --option="dns forwarder=${DNS_FORWARDER}"
 
-__update-krb-resolv-hosts-files
+update-etc-files

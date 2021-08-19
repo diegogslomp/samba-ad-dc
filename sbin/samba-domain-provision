@@ -3,8 +3,12 @@
 set -e
 
 samba-tool domain provision \
-  --server-role=${SERVER_ROLE} --use-rfc2307 --dns-backend=${DNS_BACKEND} \
-  --realm=${REALM} --domain=${DOMAIN} --adminpass=${ADMIN_PASS} \
+  --server-role=${SERVER_ROLE} \
+  --use-rfc2307 \
+  --dns-backend=${DNS_BACKEND} \
+  --realm=${REALM} \
+  --domain=${DOMAIN} \
+  --adminpass=${ADMIN_PASS} \
   --option="dns forwarder=${DNS_FORWARDER}"
 
-__update-krb-resolv-hosts-files
+update-etc-files

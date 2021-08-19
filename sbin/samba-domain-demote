@@ -1,0 +1,7 @@
+#!/bin/bash
+# Exit if any error
+set -e
+
+test $# -ge 1 || { echo "Usage: samba-domain-demote <server>"; exit 1; }
+
+samba-tool domain demote --remove-other-dead-server=${1}
