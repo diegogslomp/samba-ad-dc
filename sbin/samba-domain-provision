@@ -1,6 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 # Exit if any error
-set -e
+set -euo pipefail
 
 samba-tool domain provision \
   --server-role=${SERVER_ROLE} \

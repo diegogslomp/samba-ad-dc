@@ -1,6 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 # Exit if any error
-set -e
+set -euo pipefail
 
 samba-tool domain join ${REALM} ${SERVER_ROLE} \
   --server=dc1 \

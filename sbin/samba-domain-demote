@@ -1,6 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 # Exit if any error
-set -e
+set -euo pipefail
 
 test $# -ge 1 || { echo "Usage: samba-domain-demote <server>"; exit 1; }
 

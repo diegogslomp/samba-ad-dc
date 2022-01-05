@@ -7,9 +7,19 @@ services:
       REALM: DGS.NET
       SEARCH_DOMAIN: dgs.net
       DOMAIN: DGS
+      ADMIN_PASS: Passw0rd
+      DNS_FORWARDER: 8.8.8.8
+      SERVER_ROLE: dc
+      DNS_BACKEND: SAMBA_INTERNAL
     command: bash -c "samba-domain-provision && samba -F"
     volumes:
+      - usr-local-samba:/usr/local/samba
       - ./sbin:/usr/local/sbin
+    ports:
+      - 137:137/udp
+      - 138:138/udp
+      - 139:139
+      - 445:445
 
   dc2:
     image: diegogslomp/samba-ad-dc:ubuntu
@@ -25,4 +35,9 @@ services:
       DNS_BACKEND: SAMBA_INTERNAL
     command: bash -c "samba-domain-join && samba -F"
     volumes:
+      - var-lib-samba:/var/lib/samba
       - ./sbin:/usr/local/sbin
+
+volumes:
+  usr-local-samba:
+  var-lib-samba:
