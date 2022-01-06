@@ -3,11 +3,11 @@
 # Exit if any error
 set -euo pipefail
 
-samba-tool domain join ${REALM} ${SERVER_ROLE} \
+samba-tool domain join "${REALM}" "${SERVER_ROLE}" \
   --server=dc1 \
   --username=administrator \
-  --password=${ADMIN_PASS} \
-  --dns-backend=${DNS_BACKEND} \
+  --password="${ADMIN_PASS}" \
+  --dns-backend="${DNS_BACKEND}" \
   --option="dns forwarder=${DNS_FORWARDER}"
 
 update-etc-files

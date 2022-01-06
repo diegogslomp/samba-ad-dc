@@ -4,22 +4,22 @@
 set -euo pipefail
 
 # Change krb5 file with compiled files
-if grep -qv ${SEARCH_DOMAIN} /etc/krb5.conf; then
+if grep -qv "${SEARCH_DOMAIN}" /etc/krb5.conf; then
   # The krb5.conf location is different from mirror and compiled from source files
   KRB5_FROM_MIRROR='/var/lib/samba/private/krb5.conf'
   KRB5_COMPILED='/usr/local/samba/private/krb5.conf'
-  test -f ${KRB5_FROM_MIRROR} && cat ${KRB5_FROM_MIRROR} > /etc/krb5.conf
-  test -f ${KRB5_COMPILED} && cat ${KRB5_COMPILED} > /etc/krb5.conf
+  test -f "${KRB5_FROM_MIRROR}" && cat "${KRB5_FROM_MIRROR}" > /etc/krb5.conf
+  test -f "${KRB5_COMPILED}" && cat "${KRB5_COMPILED}" > /etc/krb5.conf
 fi
 
 # Change resolv.conf based on current network info
-if grep -qv ${SEARCH_DOMAIN} /etc/resolv.conf; then
+if grep -qv "${SEARCH_DOMAIN}" /etc/resolv.conf; then
   SERVER_IP=$(ip a | grep 'scope global' | awk '{print $2}' | awk -F / '{print $1}')
   echo -e "namerserver ${SERVER_IP}\nsearch ${SEARCH_DOMAIN}" > /etc/resolv.conf
 fi
 
 # Change /etc/hosts file with current hostname and domain
-if grep -qv ${SEARCH_DOMAIN} /etc/hosts; then
+if grep -qv "${SEARCH_DOMAIN}" /etc/hosts; then
   echo -e "127.0.0.1 localhost localhost.localdomain" > /etc/hosts && \
   echo -e "${SERVER_IP} $(hostname).${SEARCH_DOMAIN} $(hostname)" >> /etc/hosts
 fi
