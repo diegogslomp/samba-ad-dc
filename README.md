@@ -2,7 +2,7 @@
 
 Samba Active Directory Domain Controller Docker Image
 
-## Using [docker hub](https://hub.docker.com/r/diegogslomp/samba-ad-dc) image
+## Using [pre-built](https://hub.docker.com/r/diegogslomp/samba-ad-dc) image
 
 1. Download docker-compose.yml
 ```
@@ -20,7 +20,7 @@ docker-compose up -d && docker-compose logs -f
 docker-compose exec dc1 samba-tests
 ```
 
-## Or build your own images
+## Or build your own
 
 1. Clone this repo
 ```
