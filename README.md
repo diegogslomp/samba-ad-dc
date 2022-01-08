@@ -24,7 +24,7 @@ docker-compose exec dc1 samba-tests
 
 1. Clone this repo
 ```
-git clone --depth 1 https://github.com/diegogslomp/django-monitor
+git clone --recurse-submodules --depth 1 https://github.com/diegogslomp/django-monitor
 ```
 
 2. Build centos and ubuntu images
