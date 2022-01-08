@@ -2,46 +2,49 @@
 
 Samba Active Directory Domain Controller Docker Image
 
+## Using [docker hub](https://hub.docker.com/r/diegogslomp/samba-ad-dc) image
 
-Download docker-compose.yml
+1. Download docker-compose.yml
 ```
 curl -o docker-compose.yml \
 https://raw.githubusercontent.com/diegogslomp/samba-ad-dc/master/docker-compose.yml
 ```
 
-Start DCs and show logs (Ctrl+C to exit)
+2. Start DCs and show logs (Ctrl+C to exit)
 ```
 docker-compose up -d && docker-compose logs -f
 ```
 
-Run tests
+3. Run tests
 ```
 docker-compose exec dc1 samba-tests
 ```
 
-Or clone this repo
+## Or build your own images
+
+1. Clone this repo
 ```
 git clone --depth 1 https://github.com/diegogslomp/django-monitor
 ```
 
-Build centos and ubuntu images
+2. Build centos and ubuntu images
 ```
 docker build --no-cache --tag diegogslomp/samba-ad-dc:centos -f Dockerfile .
 docker build --no-cache --tag diegogslomp/samba-ad-dc:ubuntu -f Dockerfile.ubuntu .
 ```
 
-Copy and edit vars from override file with domain info
+3. Copy and edit vars from override file with domain info
 ```
 cp docker-compose.override_.yml docker-compose.override.yml
 ```
 
-Start DCs and show logs (Ctrl+C to exit)
+4. Start DCs and show logs (Ctrl+C to exit)
 ```
 docker-compose up -d dc1 && docker-compose logs -f
 docker-compose up -d dc2 && docker-compose logs -f
 ```
 
-Run tests
+5. Run tests
 ```
 docker-compose exec dc1 samba-tests
 docker-compose exec dc2 samba-tests
