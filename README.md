@@ -10,7 +10,7 @@ curl -o docker-compose.yml \
 https://raw.githubusercontent.com/diegogslomp/samba-ad-dc/master/docker-compose.yml
 ```
 
-2. Start DCs and show logs (Ctrl+C to exit)
+2. Start DC and show logs (Ctrl+c to exit)
 ```
 docker-compose up -d && docker-compose logs -f
 ```
@@ -33,12 +33,12 @@ docker build --no-cache --tag diegogslomp/samba-ad-dc:centos -f Dockerfile .
 docker build --no-cache --tag diegogslomp/samba-ad-dc:ubuntu -f Dockerfile.ubuntu .
 ```
 
-3. Copy and edit vars from override file with domain info
+3. Copy and edit yml file with domain info
 ```
 cp docker-compose.override_.yml docker-compose.override.yml
 ```
 
-4. Start DCs and show logs (Ctrl+C to exit)
+4. Start DCs and show logs (Ctrl+c to exit)
 ```
 docker-compose up -d dc1 && docker-compose logs -f
 docker-compose up -d dc2 && docker-compose logs -f
