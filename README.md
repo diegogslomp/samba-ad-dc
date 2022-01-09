@@ -6,8 +6,7 @@ Samba Active Directory Domain Controller Docker Image
 
 1. Download docker-compose.yml
 ```
-curl -o docker-compose.yml \
-https://raw.githubusercontent.com/diegogslomp/samba-ad-dc/master/docker-compose.yml
+curl -LO https://raw.githubusercontent.com/diegogslomp/samba-ad-dc/master/docker-compose.yml
 ```
 
 2. Start DC and show logs (Ctrl+c to exit)
