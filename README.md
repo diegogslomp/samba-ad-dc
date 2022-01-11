@@ -23,7 +23,7 @@ docker-compose exec dc1 samba-tests
 
 1. Clone this repo
 ```
-git clone --depth=1 https://github.com/diegogslomp/samba-ad-dc
+git clone --depth=1 https://github.com/diegogslomp/samba-ad-dc && cd samba-ad-dc
 ```
 
 2. Build centos and ubuntu images
