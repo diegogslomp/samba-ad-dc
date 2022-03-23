@@ -2,7 +2,7 @@ version: "3.1"
 
 services:
   dc1:
-    image: diegogslomp/samba-ad-dc:centos
+    image: samba-ad-dc:almalinux
     environment:
       REALM: DGS.NET
       SEARCH_DOMAIN: dgs.net
@@ -14,7 +14,6 @@ services:
     command: bash -c "samba-domain-provision && samba -F"
     volumes:
       - usr-local-samba:/usr/local/samba
-      - ./sbin:/usr/local/sbin
     ports:
       - 137:137/udp
       - 138:138/udp
@@ -22,7 +21,7 @@ services:
       - 445:445
 
   dc2:
-    image: diegogslomp/samba-ad-dc:ubuntu
+    image: samba-ad-dc:ubuntu
     hostname: DC2
     privileged: true
     environment:
@@ -36,7 +35,6 @@ services:
     command: bash -c "samba-domain-join && samba -F"
     volumes:
       - var-lib-samba:/var/lib/samba
-      - ./sbin:/usr/local/sbin
 
 volumes:
   usr-local-samba:

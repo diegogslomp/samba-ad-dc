@@ -2,7 +2,7 @@
 
 Samba Active Directory Domain Controller Docker Image
 
-## Use [pre-built](https://hub.docker.com/r/diegogslomp/samba-ad-dc) centos image
+## Use [pre-built](https://hub.docker.com/r/diegogslomp/samba-ad-dc) almalinux image
 
 1. Download docker-compose.yml
 ```
@@ -19,17 +19,17 @@ docker-compose up -d && docker-compose logs -f
 docker-compose exec dc1 samba-tests
 ```
 
-## Or build centos and ubuntu DCs
+## Or build almalinux and ubuntu DCs
 
 1. Clone this repo
 ```
 git clone --depth=1 https://github.com/diegogslomp/samba-ad-dc && cd samba-ad-dc
 ```
 
-2. Build centos and ubuntu images
+2. Build almalinux and ubuntu images
 ```
-docker build --no-cache --tag diegogslomp/samba-ad-dc:centos -f Dockerfile .
-docker build --no-cache --tag diegogslomp/samba-ad-dc:ubuntu -f Dockerfile.ubuntu .
+docker build --no-cache --tag samba-ad-dc:almalinux --file Dockerfile .
+docker build --no-cache --tag samba-ad-dc:ubuntu --file Dockerfile.ubuntu .
 ```
 
 3. Copy and edit yml file with domain info
