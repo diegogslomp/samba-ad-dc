@@ -2,13 +2,13 @@ FROM ubuntu
 
 RUN apt update && apt upgrade -y && \
     apt install samba smbclient winbind libpam-winbind \
-                libnss-winbind krb5-kdc libpam-krb5 \
-                vim iproute2 dnsutils -y && \
+    libnss-winbind krb5-kdc libpam-krb5 \
+    vim iproute2 dnsutils -y && \
     apt clean autoclean && \
-    apt autoremove -y
+    apt autoremove -y && \
+    mv /etc/samba/smb.conf /etc/samba/smb.ORIG.conf
 
-RUN mv /etc/samba/smb.conf /etc/samba/smb.ORIG.conf
-
+WORKDIR /usr/local/sbin
 COPY sbin /usr/local/sbin
 CMD bash -c "samba-domain-provision && samba -F"
 EXPOSE 137/udp 138/udp 139 445
