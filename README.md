@@ -33,8 +33,7 @@ docker-compose build
 
 3. Start DCs and show logs (Ctrl+c to exit)
 ```
-docker-compose up -d dc1 && docker-compose logs -f
-docker-compose up -d dc2 && docker-compose logs -f
+docker-compose up -d && docker-compose logs -f
 ```
 
 4. Run tests
