@@ -2,7 +2,14 @@ version: "3.1"
 
 services:
   dc1:
-    image: samba-ad-dc:almalinux
+    image: samba:almalinux
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dc1
+    hostname: DC1
+    privileged: true
     environment:
       REALM: DGS.NET
       SEARCH_DOMAIN: dgs.net
@@ -21,7 +28,12 @@ services:
       - 445:445
 
   dc2:
-    image: samba-ad-dc:ubuntu
+    image: samba:ubuntu
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile.ubuntu
+    container_name: dc2
     hostname: DC2
     privileged: true
     environment:

@@ -1,4 +1,4 @@
-FROM almalinux:8
+FROM rockylinux:8
 
 RUN yum update -y && \
   yum install epel-release -y && \

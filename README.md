@@ -28,22 +28,16 @@ git clone --depth=1 https://github.com/diegogslomp/samba-ad-dc && cd samba-ad-dc
 
 2. Build almalinux and ubuntu images
 ```
-docker build --no-cache --tag samba-ad-dc:almalinux --file Dockerfile .
-docker build --no-cache --tag samba-ad-dc:ubuntu --file Dockerfile.ubuntu .
+docker-compose build
 ```
 
-3. Copy and edit yml file with domain info
-```
-cp docker-compose.override_.yml docker-compose.override.yml
-```
-
-4. Start DCs and show logs (Ctrl+c to exit)
+3. Start DCs and show logs (Ctrl+c to exit)
 ```
 docker-compose up -d dc1 && docker-compose logs -f
 docker-compose up -d dc2 && docker-compose logs -f
 ```
 
-5. Run tests
+4. Run tests
 ```
 docker-compose exec dc1 samba-tests
 docker-compose exec dc2 samba-tests
