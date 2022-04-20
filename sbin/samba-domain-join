@@ -3,10 +3,15 @@
 # Exit if any error
 set -euo pipefail
 
+# Require DC as argument
 test "${#}" -ge 1 || { echo "Usage: samba-domain-join <server>"; exit 1; }
-
 server="${1}"
 
+# Skip domain join if krb5 already have domain info
+grep -q "${SEARCH_DOMAIN}" /etc/krb5.conf && \
+  echo 'Skipping domain join..' && exit 0
+
+# Wait until dc LDAP response
 until nc -z -w5 "${server}" 389; do
   echo "Waiting 5 seconds for ${server} LDAP response.."
   sleep 5
