@@ -26,7 +26,7 @@ docker-compose exec dc1 samba-tests
 git clone --depth=1 https://github.com/diegogslomp/samba-ad-dc && cd samba-ad-dc
 ```
 
-2. Build almalinux and ubuntu images
+2. Build almalinux, ubuntu and rockylinux images
 ```
 docker-compose build
 ```
@@ -40,6 +40,7 @@ docker-compose up -d && docker-compose logs -f
 ```
 docker-compose exec dc1 samba-tests
 docker-compose exec dc2 samba-tests
+docker-compose exec dc3 samba-tests
 ```
 
 Official site: https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_Domain_Controller
