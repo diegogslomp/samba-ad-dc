@@ -46,7 +46,7 @@ docker-compose exec dc3 samba-tests
 TODO: 
 
   - [ ] [Sysvol replication workaround](https://wiki.samba.org/index.php/Rsync_based_SysVol_replication_workaround)
-  - [ ] Proxy for multiple DCs, for now only dc1 ports are exposed ¯\\\_(ツ)_/¯
+  - [ ] When multiple DCs, only dc1 ports are exposed ¯\\\_(ツ)_/¯
   
 Official site: https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_Domain_Controller
 

@@ -18,7 +18,11 @@ services:
       DNS_FORWARDER: 8.8.8.8
       SERVER_ROLE: dc
       DNS_BACKEND: SAMBA_INTERNAL
-    command: bash -c "samba-domain-provision && samba -F"
+    command: bash -c "
+      samba-domain-provision &&
+      echo -e \"172.16.238.20 DC2.dgs.net DC2\" >> /etc/hosts &&
+      echo -e \"172.16.238.30 DC3.dgs.net DC3\" >> /etc/hosts &&
+      samba -F"
     volumes:
       - usr-local-samba:/usr/local/samba
     ports:
@@ -47,7 +51,11 @@ services:
       DNS_FORWARDER: 8.8.8.8
       SERVER_ROLE: dc
       DNS_BACKEND: SAMBA_INTERNAL
-    command: bash -c "samba-domain-join dc1 && samba -F"
+    command: bash -c "
+      samba-domain-join DC1 &&
+      echo -e \"172.16.238.10 DC1.dgs.net DC1\" >> /etc/hosts &&
+      echo -e \"172.16.238.30 DC3.dgs.net DC3\" >> /etc/hosts &&
+      samba -F"
     volumes:
       - var-lib-samba:/var/lib/samba
     networks:
@@ -71,7 +79,11 @@ services:
       DNS_FORWARDER: 8.8.8.8
       SERVER_ROLE: dc
       DNS_BACKEND: SAMBA_INTERNAL
-    command: bash -c "samba-domain-join dc1 && samba -F"
+    command: bash -c "
+      samba-domain-join DC1 &&
+      echo -e \"172.16.238.10 DC1.dgs.net DC1\" >> /etc/hosts &&
+      echo -e \"172.16.238.20 DC2.dgs.net DC2\" >> /etc/hosts &&
+      samba -F"
     volumes:
       - usr-local-samba-dc3:/usr/local/samba
     networks:
