@@ -26,6 +26,9 @@ services:
       - 138:138/udp
       - 139:139
       - 445:445
+    networks:
+      static-network:
+        ipv4_address: 172.16.238.10
 
   dc2:
     image: samba:ubuntu
@@ -47,6 +50,9 @@ services:
     command: bash -c "samba-domain-join dc1 && samba -F"
     volumes:
       - var-lib-samba:/var/lib/samba
+    networks:
+      static-network:
+        ipv4_address: 172.16.238.20
 
   dc3:
     image: samba:rockylinux
@@ -68,8 +74,17 @@ services:
     command: bash -c "samba-domain-join dc1 && samba -F"
     volumes:
       - usr-local-samba-dc3:/usr/local/samba
+    networks:
+      static-network:
+        ipv4_address: 172.16.238.30
 
 volumes:
   usr-local-samba:
   usr-local-samba-dc3:
   var-lib-samba:
+
+networks:
+  static-network:
+    ipam:
+      config:
+        - subnet: 172.16.238.0/24
