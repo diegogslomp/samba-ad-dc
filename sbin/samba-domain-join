@@ -7,8 +7,8 @@ test "${#}" -ge 1 || { echo "Usage: samba-domain-join <server>"; exit 1; }
 
 server="${1}"
 
-until nc -z -w5 "${server}" 445; do
-  echo "Waiting 5 seconds for ${server} response..."
+until nc -z -w5 "${server}" 389; do
+  echo "Waiting 5 seconds for ${server} LDAP response.."
   sleep 5
 done
 
@@ -17,6 +17,7 @@ samba-tool domain join "${REALM}" "${SERVER_ROLE}" \
   --username=administrator \
   --password="${ADMIN_PASS}" \
   --dns-backend="${DNS_BACKEND}" \
-  --option="dns forwarder=${DNS_FORWARDER}"
+  --option="dns forwarder=${DNS_FORWARDER}" || \
+  echo "Skipping domain join.."
 
 update-etc-files
