@@ -3,10 +3,6 @@
 # Exit if any error
 set -euo pipefail
 
-# Skip domain provision if krb5 already have domain info
-grep -q "${SEARCH_DOMAIN}" /etc/krb5.conf && \
-  echo 'Skipping domain provision..' && exit 0
-
 samba-tool domain provision \
   --server-role="${SERVER_ROLE}" \
   --use-rfc2307 \
