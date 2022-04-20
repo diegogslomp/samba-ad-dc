@@ -2,7 +2,7 @@
 
 Samba Active Directory Domain Controller Docker Image
 
-## Use [pre-built](https://hub.docker.com/r/diegogslomp/samba-ad-dc) almalinux image
+## Use [pre-built](https://hub.docker.com/r/diegogslomp/samba-ad-dc) Almalinux image
 
 1. Download docker-compose.yml
 ```
@@ -19,7 +19,7 @@ docker-compose up -d && docker-compose logs -f
 docker-compose exec dc1 samba-tests
 ```
 
-## Or build almalinux, ubuntu and rockylinux DCs
+## Or build Almalinux, Ubuntu and Rockylinux DCs
 
 1. Clone this repo
 ```
