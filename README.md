@@ -19,14 +19,14 @@ docker-compose up -d && docker-compose logs -f
 docker-compose exec dc1 samba-tests
 ```
 
-## Or build almalinux and ubuntu DCs
+## Or build almalinux, ubuntu and rockylinux DCs
 
 1. Clone this repo
 ```
 git clone --depth=1 https://github.com/diegogslomp/samba-ad-dc && cd samba-ad-dc
 ```
 
-2. Build almalinux, ubuntu and rockylinux images
+2. Build images
 ```
 docker-compose build
 ```
