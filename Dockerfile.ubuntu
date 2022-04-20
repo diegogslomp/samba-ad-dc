@@ -3,7 +3,7 @@ FROM ubuntu
 RUN apt update && apt upgrade -y && \
     apt install samba smbclient winbind libpam-winbind \
     libnss-winbind krb5-kdc libpam-krb5 \
-    vim iproute2 dnsutils -y && \
+    vim iproute2 dnsutils iputils-ping netcat -y && \
     apt clean autoclean && \
     apt autoremove -y && \
     mv /etc/samba/smb.conf /etc/samba/smb.ORIG.conf

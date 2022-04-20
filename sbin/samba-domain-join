@@ -5,11 +5,18 @@ set -euo pipefail
 
 test "${#}" -ge 1 || { echo "Usage: samba-domain-join <server>"; exit 1; }
 
+server="${1}"
+
+until nc -z -w5 "${server}" 445; do
+  echo "Waiting 5 seconds for ${server} response..."
+  sleep 5
+done
+
 samba-tool domain join "${REALM}" "${SERVER_ROLE}" \
-  --server="${1}" \
+  --server="${server}" \
   --username=administrator \
   --password="${ADMIN_PASS}" \
   --dns-backend="${DNS_BACKEND}" \
-  --option="dns forwarder=${DNS_FORWARDER}" || true
+  --option="dns forwarder=${DNS_FORWARDER}"
 
 update-etc-files
