@@ -11,7 +11,8 @@ RUN yum update -y && \
   perl-ExtUtils-MakeMaker perl-Parse-Yapp popt-devel python3-cryptography \
   python3-dns python3-gpg python36-devel readline-devel rpcgen systemd-devel \
   tar zlib-devel \
-  bind-utils flex dbus-devel libtirpc-devel python3-markdown bison perl-JSON iproute -y && \
+  bind-utils flex dbus-devel libtirpc-devel python3-markdown bison perl-JSON \
+  iproute python3-setproctitle -y && \
   yum clean all -y
 
 ENV SMB_VERSION latest

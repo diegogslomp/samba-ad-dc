@@ -44,7 +44,7 @@ services:
       DNS_FORWARDER: 8.8.8.8
       SERVER_ROLE: dc
       DNS_BACKEND: SAMBA_INTERNAL
-    command: bash -c "samba-domain-join && samba -F"
+    command: bash -c "samba-domain-join dc1 && samba -F"
     volumes:
       - var-lib-samba:/var/lib/samba
 
@@ -65,7 +65,7 @@ services:
       DNS_FORWARDER: 8.8.8.8
       SERVER_ROLE: dc
       DNS_BACKEND: SAMBA_INTERNAL
-    command: bash -c "samba-domain-join && samba -F"
+    command: bash -c "samba-domain-join dc1 && samba -F"
     volumes:
       - usr-local-samba-dc3:/usr/local/samba
 
