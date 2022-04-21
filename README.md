@@ -38,9 +38,7 @@ docker-compose up -d && docker-compose logs -f
 
 4. Run tests
 ```
-docker-compose exec dc1 samba-tests
-docker-compose exec dc2 samba-tests
-docker-compose exec dc3 samba-tests
+for dc in dc{1,2,3}; do docker-compose exec $dc samba-tests; done
 ```
 
 TODO: 
