@@ -44,7 +44,7 @@ for dc in dc{1,2,3}; do docker-compose exec $dc samba-tests; done
 TODO: 
 
   - [ ] [Sysvol replication workaround](https://wiki.samba.org/index.php/Rsync_based_SysVol_replication_workaround)
-  - [ ] When multiple DCs, only dc1 ports are exposed ¯\\\_(ツ)_/¯
+  - [ ] Port redirection for joined DCs
   
 Official site: https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_Domain_Controller
 
