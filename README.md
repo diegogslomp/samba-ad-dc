@@ -4,40 +4,23 @@ Samba Active Directory Domain Controller Docker Image
 
 ## Use [pre-built](https://hub.docker.com/r/diegogslomp/samba-ad-dc) Almalinux image
 
-1. Download docker-compose.yml
+Download [docker-compose.yml](https://raw.githubusercontent.com/diegogslomp/samba-ad-dc/master/docker-compose.yml) file, start the domain controller, show logs (Ctrl+c to exit) and run tests
 ```
 curl -LO https://raw.githubusercontent.com/diegogslomp/samba-ad-dc/master/docker-compose.yml
-```
-
-2. Start DC and show logs (Ctrl+c to exit)
-```
-docker-compose up -d && docker-compose logs -f
-```
-
-3. Run tests
-```
+docker-compose up -d
+docker-compose logs -f
 docker-compose exec dc1 samba-tests
 ```
 
 ## Or build Almalinux, Ubuntu and Rockylinux DCs
 
-1. Clone this repo
+Clone this repo, build images, start DCs, show logs (Ctrl+c to exit) and run tests
 ```
-git clone --depth=1 https://github.com/diegogslomp/samba-ad-dc && cd samba-ad-dc
-```
-
-2. Build images
-```
+git clone --depth=1 https://github.com/diegogslomp/samba-ad-dc
+cd samba-ad-dc
 docker-compose build
-```
-
-3. Start DCs and show logs (Ctrl+c to exit)
-```
-docker-compose up -d && docker-compose logs -f
-```
-
-4. Run tests
-```
+docker-compose up -d
+docker-compose logs -f
 for dc in dc{1,2,3}; do docker-compose exec $dc samba-tests; done
 ```
 
