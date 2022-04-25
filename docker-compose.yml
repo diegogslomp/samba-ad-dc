@@ -2,15 +2,101 @@ version: "3.1"
 
 services:
   dc1:
-    image: diegogslomp/samba-ad-dc
+    image: samba:almalinux
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile.almalinux
+    container_name: dc1
     hostname: DC1
     privileged: true
     environment:
-      REALM: SAMDOM.EXAMPLE.COM
-      SEARCH_DOMAIN: samdom.example.com
-      DOMAIN: SAMDOM
+      REALM: DGS.NET
+      SEARCH_DOMAIN: dgs.net
+      DOMAIN: DGS
       ADMIN_PASS: Passw0rd
       DNS_FORWARDER: 8.8.8.8
       SERVER_ROLE: dc
       DNS_BACKEND: SAMBA_INTERNAL
-    command: bash -c "samba-domain-provision && samba -F"
+    command: bash -c "
+      samba-domain-provision &&
+      echo -e \"172.16.238.20 DC2.dgs.net DC2\" >> /etc/hosts &&
+      echo -e \"172.16.238.30 DC3.dgs.net DC3\" >> /etc/hosts &&
+      samba -F"
+    volumes:
+      - usr-local-samba:/usr/local/samba
+    ports:
+      - 137:137/udp
+      - 138:138/udp
+      - 139:139
+      - 445:445
+    networks:
+      static-network:
+        ipv4_address: 172.16.238.10
+
+  dc2:
+    image: samba:ubuntu
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile.ubuntu
+    container_name: dc2
+    hostname: DC2
+    privileged: true
+    environment:
+      REALM: DGS.NET
+      SEARCH_DOMAIN: dgs.net
+      DOMAIN: DGS
+      ADMIN_PASS: Passw0rd
+      DNS_FORWARDER: 8.8.8.8
+      SERVER_ROLE: dc
+      DNS_BACKEND: SAMBA_INTERNAL
+    command: bash -c "
+      samba-domain-join DC1 &&
+      echo -e \"172.16.238.10 DC1.dgs.net DC1\" >> /etc/hosts &&
+      echo -e \"172.16.238.30 DC3.dgs.net DC3\" >> /etc/hosts &&
+      samba -F"
+    volumes:
+      - var-lib-samba:/var/lib/samba
+    networks:
+      static-network:
+        ipv4_address: 172.16.238.20
+
+  dc3:
+    image: samba:rockylinux
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile.rockylinux
+    container_name: dc3
+    hostname: DC3
+    privileged: true
+    environment:
+      REALM: DGS.NET
+      SEARCH_DOMAIN: dgs.net
+      DOMAIN: DGS
+      ADMIN_PASS: Passw0rd
+      DNS_FORWARDER: 8.8.8.8
+      SERVER_ROLE: dc
+      DNS_BACKEND: SAMBA_INTERNAL
+    command: bash -c "
+      samba-domain-join DC1 &&
+      echo -e \"172.16.238.10 DC1.dgs.net DC1\" >> /etc/hosts &&
+      echo -e \"172.16.238.20 DC2.dgs.net DC2\" >> /etc/hosts &&
+      samba -F"
+    volumes:
+      - usr-local-samba-dc3:/usr/local/samba
+    networks:
+      static-network:
+        ipv4_address: 172.16.238.30
+
+volumes:
+  usr-local-samba:
+  usr-local-samba-dc3:
+  var-lib-samba:
+
+networks:
+  static-network:
+    ipam:
+      config:
+        - subnet: 172.16.238.0/24
