@@ -51,6 +51,7 @@ services:
       DNS_FORWARDER: 8.8.8.8
       SERVER_ROLE: dc
       DNS_BACKEND: SAMBA_INTERNAL
+      SAMBA_PATH: /var/lib/samba
     command: bash -c "
       samba-domain-join DC1 &&
       echo -e \"172.16.238.10 DC1.dgs.net DC1\" >> /etc/hosts &&
