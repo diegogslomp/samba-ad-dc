@@ -2,18 +2,18 @@
 
 Samba Active Directory Domain Controller Docker Image
 
-Run [Almalinux image](https://hub.docker.com/r/diegogslomp/samba-ad-dc)
+1. Provision a new domain and start [Almalinux image](https://hub.docker.com/r/diegogslomp/samba-ad-dc) DC
 ```
 docker run -d --restart=always --privileged -e REALM='SAMDOM.EXAMPLE.COM' -e SEARCH_DOMAIN='samdom.example.com' -e DOMAIN='SAMDOM' -e ADMIN_PASS='Passw0rd' -e SERVER_ROLE='dc' -e DNS_BACKEND='SAMBA_INTERNAL' -e DNS_FORWARDER='8.8.8.8' -v dc1-samba:/usr/local/samba -p 53 -p 88 -p 123/udp -p 135 -p 137/udp -p 138/udp -p 139 -p 389 -p 445 -p 464 -p 636 -p 3268 -p 3269 --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
 ```
 
-Show logs (Ctrl+c to exit) and run tests
+2. Show logs (Ctrl+c to exit) and run tests
 ```
 docker logs dc1 -f
 docker exec dc1 samba-tests
 ```
 
-For multiple DCs testing:
+3. For multiple DCs testing:
 ```
 git clone --depth=1 https://github.com/diegogslomp/samba-ad-dc
 cd samba-ad-dc
