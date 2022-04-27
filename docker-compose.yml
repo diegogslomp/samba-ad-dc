@@ -26,10 +26,18 @@ services:
     volumes:
       - dc1-local-samba:/usr/local/samba
     ports:
+      - 53:53
+      - 88:88
+      - 123/udp
       - 137:137/udp
       - 138:138/udp
       - 139:139
+      - 389:389
       - 445:445
+      - 464:464
+      - 636:636
+      - 3268:3268
+      - 3269:3269
     networks:
       static-network:
         ipv4_address: 172.16.238.10
