@@ -4,7 +4,7 @@ Samba Active Directory Domain Controller Docker Image
 
 Run [Almalinux image](https://hub.docker.com/r/diegogslomp/samba-ad-dc)
 ```
-docker run -d --restart=always --privileged -e REALM='SAMDOM.EXAMPLE.COM' -e SEARCH_DOMAIN='samdom.example.com' -e DOMAIN='SAMDOM' -e ADMIN_PASS='Passw0rd' -e SERVER_ROLE='dc' -e DNS_BACKEND='SAMBA_INTERNAL' -e DNS_FORWARDER='8.8.8.8' -v dc1-samba:/usr/local/samba -p 137/udp -p 138/udp -p 139 -p 445 --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
+docker run -d --restart=always --privileged -e REALM='SAMDOM.EXAMPLE.COM' -e SEARCH_DOMAIN='samdom.example.com' -e DOMAIN='SAMDOM' -e ADMIN_PASS='Passw0rd' -e SERVER_ROLE='dc' -e DNS_BACKEND='SAMBA_INTERNAL' -e DNS_FORWARDER='8.8.8.8' -v dc1-samba:/usr/local/samba -p 53 -p 88 -p 123/udp -p 135 -p 137/udp -p 138/udp -p 139 -p 389 -p 445 -p 464 -p 636 -p 3269 -p 3269 --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
 ```
 
 Show logs (Ctrl+c to exit) and run tests
