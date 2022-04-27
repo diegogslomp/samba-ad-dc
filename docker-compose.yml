@@ -24,7 +24,7 @@ services:
       echo -e \"172.16.238.30 DC3.dgs.net DC3\" >> /etc/hosts &&
       samba -F"
     volumes:
-      - usr-local-samba:/usr/local/samba
+      - dc1-local-samba:/usr/local/samba
     ports:
       - 137:137/udp
       - 138:138/udp
@@ -58,7 +58,8 @@ services:
       echo -e \"172.16.238.30 DC3.dgs.net DC3\" >> /etc/hosts &&
       samba -F"
     volumes:
-      - var-lib-samba:/var/lib/samba
+      - dc2-lib-samba:/var/lib/samba
+      - dc2-etc-samba:/etc/samba
     networks:
       static-network:
         ipv4_address: 172.16.238.20
@@ -86,15 +87,16 @@ services:
       echo -e \"172.16.238.20 DC2.dgs.net DC2\" >> /etc/hosts &&
       samba -F"
     volumes:
-      - usr-local-samba-dc3:/usr/local/samba
+      - dc3-local-samba:/usr/local/samba
     networks:
       static-network:
         ipv4_address: 172.16.238.30
 
 volumes:
-  usr-local-samba:
-  usr-local-samba-dc3:
-  var-lib-samba:
+  dc1-local-samba:
+  dc2-lib-samba:
+  dc2-etc-samba:
+  dc3-local-samba:
 
 networks:
   static-network:

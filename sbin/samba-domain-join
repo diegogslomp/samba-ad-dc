@@ -13,12 +13,13 @@ until nc -z -w5 "${server}" 389; do
   sleep 5
 done
 
-samba-tool domain join "${REALM}" "${SERVER_ROLE}" \
-  --server="${server}" \
-  --username=administrator \
-  --password="${ADMIN_PASS}" \
-  --dns-backend="${DNS_BACKEND}" \
-  --option="dns forwarder=${DNS_FORWARDER}" || \
+[[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]] && \
+  samba-tool domain join "${REALM}" "${SERVER_ROLE}" \
+    --server="${server}" \
+    --username=administrator \
+    --password="${ADMIN_PASS}" \
+    --dns-backend="${DNS_BACKEND}" \
+    --option="dns forwarder=${DNS_FORWARDER}" || \
   echo "Skipping domain join.."
 
 update-etc-files
