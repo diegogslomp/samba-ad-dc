@@ -5,6 +5,7 @@ set -euo pipefail
 
 # Skip domain provision if secrets exists
 [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]] && \
+  INTERFACE=$(ip a | grep BROADCAST | head -n1 | awk '{print $2}' | sed 's/://')
   samba-tool domain provision \
     --server-role="${SERVER_ROLE}" \
     --use-rfc2307 \
@@ -12,6 +13,7 @@ set -euo pipefail
     --realm="${REALM}" \
     --domain="${DOMAIN}" \
     --adminpass="${ADMIN_PASS}" \
-    --option="dns forwarder=${DNS_FORWARDER}"
-
+    --option="dns forwarder=${DNS_FORWARDER}" \
+    --option="interfaces=lo ${INTERFACE}" \
+    --option="bind interfaces only=yes"
 update-etc-files

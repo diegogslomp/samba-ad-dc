@@ -11,7 +11,7 @@ fi
 
 # Change resolv.conf based on current network info
 if grep -qv "${SEARCH_DOMAIN}" /etc/resolv.conf; then
-  SERVER_IP=$(ip a | grep 'scope global' | awk '{print $2}' | awk -F / '{print $1}')
+  SERVER_IP=$(ip a | grep 'scope global' | head -n 1 | awk '{print $2}' | awk -F / '{print $1}')
   echo -e "nameserver ${SERVER_IP}\nsearch ${SEARCH_DOMAIN}" > /etc/resolv.conf
 fi
 
