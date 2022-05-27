@@ -27,10 +27,10 @@ docker exec dc1 samba-tests
 ```
 git clone --depth=1 https://github.com/diegogslomp/samba-ad-dc
 cd samba-ad-dc
-docker-compose build
-docker-compose up -d
-docker-compose logs -f
-for dc in dc{1,2,3}; do docker-compose exec $dc samba-tests; done
+docker compose build
+docker compose up -d
+docker compose logs -f
+for dc in dc{1,2,3}; do docker compose exec $dc samba-tests; done
 ```
 
 TODO:
