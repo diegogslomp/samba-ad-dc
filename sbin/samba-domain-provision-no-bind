@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Exit if any error
+set -euo pipefail
+
+# Skip domain provision if secrets exists
+[[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]] && \
+  samba-tool domain provision \
+    --server-role="${SERVER_ROLE}" \
+    --use-rfc2307 \
+    --dns-backend="${DNS_BACKEND}" \
+    --realm="${REALM}" \
+    --domain="${DOMAIN}" \
+    --adminpass="${ADMIN_PASS}" \
+    --option="dns forwarder=${DNS_FORWARDER}"
+update-etc-files
