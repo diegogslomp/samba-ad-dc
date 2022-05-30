@@ -3,11 +3,6 @@
 # Exit if any error
 set -euo pipefail
 
-until ping -c1 localhost >/dev/null 2>&1; do
-  echo "Waiting 5 seconds for localhost ping response response.."
-  sleep 5
-done
-
 # Skip domain provision if secrets exists
 if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
   samba-tool domain provision \
