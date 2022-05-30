@@ -3,8 +3,13 @@
 # Exit if any error
 set -euo pipefail
 
+until ping -c1 localhost; do
+  echo "Waiting 5 seconds for localhost ping response response.."
+  sleep 5
+done
+
 # Skip domain provision if secrets exists
-[[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]] && \
+if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
   INTERFACE=$(ip a | grep BROADCAST | head -n1 | awk '{print $2}' | sed 's/://')
   samba-tool domain provision \
     --server-role="${SERVER_ROLE}" \
@@ -16,4 +21,6 @@ set -euo pipefail
     --option="dns forwarder=${DNS_FORWARDER}" \
     --option="interfaces=lo ${INTERFACE}" \
     --option="bind interfaces only=yes"
+fi
+
 update-etc-files

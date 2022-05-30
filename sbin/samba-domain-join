@@ -13,7 +13,7 @@ until nc -z -w5 "${server}" 389; do
   sleep 5
 done
 
-[[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]] && \
+if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
   INTERFACE=$(ip a | grep BROADCAST | head -n1 | awk '{print $2}' | sed 's/://')
   samba-tool domain join "${REALM}" "${SERVER_ROLE}" \
     --server="${server}" \
@@ -24,5 +24,6 @@ done
     --option="interfaces=lo ${INTERFACE}" \
     --option="bind interfaces only=yes" || \
   echo "Skipping domain join.."
+fi
 
 update-etc-files
