@@ -3,7 +3,7 @@
 # Exit if any error
 set -euo pipefail
 
-until ping -c1 localhost; do
+until ping -c1 localhost >/dev/null 2>&1; do
   echo "Waiting 5 seconds for localhost ping response response.."
   sleep 5
 done
