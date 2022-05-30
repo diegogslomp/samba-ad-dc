@@ -9,7 +9,7 @@ until ping -c1 localhost >/dev/null 2>&1; do
 done
 
 # Skip domain provision if secrets exists
-[[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]] && \
+if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
   samba-tool domain provision \
     --server-role="${SERVER_ROLE}" \
     --use-rfc2307 \
@@ -18,4 +18,6 @@ done
     --domain="${DOMAIN}" \
     --adminpass="${ADMIN_PASS}" \
     --option="dns forwarder=${DNS_FORWARDER}"
+fi
+
 update-etc-files
