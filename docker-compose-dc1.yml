@@ -4,6 +4,7 @@ services:
   dc1:
     image: samba:almalinux
     restart: unless-stopped
+    network_mode: host
     build:
       context: .
       dockerfile: Dockerfile.almalinux
@@ -19,39 +20,10 @@ services:
       SERVER_ROLE: dc
       DNS_BACKEND: SAMBA_INTERNAL
     command: bash -c "
-      samba-domain-provision-no-bind &&
+      samba-domain-provision &&
       samba -F"
-    ports:
-     - "53:53"
-     - "53:53/udp"
-     - "88:88"
-     - "88:88/udp"
-     - "123:123/udp"
-     - "135:135"
-     - "137:137/udp"
-     - "138:138/udp"
-     - "139:139"
-     - "389:389"
-     - "389:389/udp"
-     - "445:445"
-     - "464:464"
-     - "464:464/udp"
-     - "636:636"
-     - "3268:3268"
-     - "3269:3269"
-     #- 49152-65535
     volumes:
       - dc1-local-samba:/usr/local/samba
 
-    networks:
-      static-network:
-        ipv4_address: 172.16.238.10
-
 volumes:
   dc1-local-samba:
-
-networks:
-  static-network:
-    ipam:
-      config:
-        - subnet: 172.16.238.0/24
