@@ -12,8 +12,8 @@ services:
     hostname: DC1
     privileged: true
     environment:
-      REALM: DGS.LOCAL
-      SEARCH_DOMAIN: dgs.local
+      REALM: DGS.NET
+      SEARCH_DOMAIN: dgs.net
       DOMAIN: DGS
       ADMIN_PASS: Passw0rd
       DNS_FORWARDER: 8.8.8.8
