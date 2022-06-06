@@ -17,13 +17,13 @@ docker run -d --privileged \
   --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
 ```
 
-3. Show logs (Ctrl+c to exit) and run tests
+2. Show logs (Ctrl+c to exit) and run tests
 ```
 docker logs dc1 -f
 docker exec dc1 samba-tests
 ```
 
-4. For multiple DCs testing:
+3. For multiple DCs testing:
 ```
 git clone --depth=1 https://github.com/diegogslomp/samba-ad-dc
 cd samba-ad-dc
@@ -41,5 +41,4 @@ Official site: https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Di
 
 Dependencies: https://wiki.samba.org/index.php/Package_Dependencies_Required_to_Build_Samba
 
-Used ports: https://wiki.samba.org/index.php/Samba_AD_DC_Port_Usage
-
+Exposed ports: https://wiki.samba.org/index.php/Samba_AD_DC_Port_Usage
