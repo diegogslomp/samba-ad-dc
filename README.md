@@ -10,8 +10,6 @@ docker run -d --privileged \
   -e SEARCH_DOMAIN='samdom.example.com' \
   -e DOMAIN='SAMDOM' \
   -e ADMIN_PASS='Passw0rd' \
-  -e SERVER_ROLE='dc' \
-  -e DNS_BACKEND='SAMBA_INTERNAL' \
   -e DNS_FORWARDER='8.8.8.8' \
   -v dc1-samba:/usr/local/samba \
   --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
@@ -23,9 +21,9 @@ docker logs dc1 -f
 docker exec dc1 samba-tests
 ```
 
-3. For multiple DCs testing:
+3. For multiple DCs testing
 ```
-git clone --depth=1 https://github.com/diegogslomp/samba-ad-dc
+git clone --single-branch https://github.com/diegogslomp/samba-ad-dc
 cd samba-ad-dc
 docker compose build
 docker compose up -d

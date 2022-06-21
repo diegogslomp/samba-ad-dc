@@ -15,11 +15,11 @@ done
 
 if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
   INTERFACE=$(ip a | grep BROADCAST | head -n1 | awk '{print $2}' | sed 's/://')
-  samba-tool domain join "${REALM}" "${SERVER_ROLE}" \
+  samba-tool domain join "${REALM}" "${SERVER_ROLE:-dc}" \
     --server="${server}" \
     --username=administrator \
     --password="${ADMIN_PASS}" \
-    --dns-backend="${DNS_BACKEND}" \
+    --dns-backend="${DNS_BACKEND:-SAMBA_INTERNAL}" \
     --option="dns forwarder=${DNS_FORWARDER}" \
     --option="interfaces=lo ${INTERFACE}" \
     --option="bind interfaces only=yes" || \

@@ -7,9 +7,9 @@ set -euo pipefail
 if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
   INTERFACE=$(ip a | grep BROADCAST | head -n1 | awk '{print $2}' | sed 's/://')
   samba-tool domain provision \
-    --server-role="${SERVER_ROLE}" \
+    --server-role="${SERVER_ROLE:-dc}" \
     --use-rfc2307 \
-    --dns-backend="${DNS_BACKEND}" \
+    --dns-backend="${DNS_BACKEND:-SAMBA_INTERNAL}" \
     --realm="${REALM}" \
     --domain="${DOMAIN}" \
     --adminpass="${ADMIN_PASS}" \

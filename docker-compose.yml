@@ -16,8 +16,6 @@ services:
       DOMAIN: DGS
       ADMIN_PASS: Passw0rd
       DNS_FORWARDER: 8.8.8.8
-      SERVER_ROLE: dc
-      DNS_BACKEND: SAMBA_INTERNAL
     command: bash -c "
       samba-domain-provision-no-bind &&
       echo -e \"172.16.238.20 DC2.dgs.net DC2\" >> /etc/hosts &&
@@ -45,8 +43,6 @@ services:
       DOMAIN: DGS
       ADMIN_PASS: Passw0rd
       DNS_FORWARDER: 8.8.8.8
-      SERVER_ROLE: dc
-      DNS_BACKEND: SAMBA_INTERNAL
       SAMBA_PATH: /var/lib/samba
     command: bash -c "
       samba-domain-join-no-bind DC1 &&
@@ -75,8 +71,6 @@ services:
       DOMAIN: DGS
       ADMIN_PASS: Passw0rd
       DNS_FORWARDER: 8.8.8.8
-      SERVER_ROLE: dc
-      DNS_BACKEND: SAMBA_INTERNAL
     command: bash -c "
       samba-domain-join-no-bind DC1 &&
       echo -e \"172.16.238.10 DC1.dgs.net DC1\" >> /etc/hosts &&

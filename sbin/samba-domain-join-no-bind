@@ -14,11 +14,11 @@ until nc -z -w5 "${server}" 389; do
 done
 
 if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
-  samba-tool domain join "${REALM}" "${SERVER_ROLE}" \
+  samba-tool domain join "${REALM}" "${SERVER_ROLE:-dc}" \
     --server="${server}" \
     --username=administrator \
     --password="${ADMIN_PASS}" \
-    --dns-backend="${DNS_BACKEND}" \
+    --dns-backend="${DNS_BACKEND:-SAMBA_INTERNAL}" \
     --option="dns forwarder=${DNS_FORWARDER}" || \
   echo "Skipping domain join.."
 fi

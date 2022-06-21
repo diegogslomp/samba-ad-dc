@@ -4,7 +4,6 @@ services:
   dc1:
     image: samba:almalinux
     restart: unless-stopped
-    network_mode: host
     build:
       context: .
       dockerfile: Dockerfile.almalinux
@@ -18,7 +17,7 @@ services:
       ADMIN_PASS: Passw0rd
       DNS_FORWARDER: 8.8.8.8
     command: bash -c "
-      samba-domain-provision &&
+      samba-domain-provision-no-bind &&
       samba -F"
     volumes:
       - dc1-local-samba:/usr/local/samba
