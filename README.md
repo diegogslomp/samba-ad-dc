@@ -10,6 +10,8 @@ docker run -d --privileged \
   -e SEARCH_DOMAIN='samdom.example.com' \
   -e DOMAIN='SAMDOM' \
   -e ADMIN_PASS='Passw0rd' \
+  -e SERVER_ROLE='dc' \
+  -e DNS_BACKEND='SAMBA_INTERNAL' \
   -e DNS_FORWARDER='8.8.8.8' \
   -v dc1-samba:/usr/local/samba \
   --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
