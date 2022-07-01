@@ -19,6 +19,7 @@ services:
       SERVER_ROLE: dc
       DNS_BACKEND: SAMBA_INTERNAL
     command: bash -c "
+      set -x &&
       samba-domain-provision-no-bind &&
       samba -F"
     volumes:
