@@ -8,9 +8,9 @@ test "${#}" -ge 1 || { echo "Usage: samba-domain-join <server>"; exit 1; }
 server="${1}"
 
 # Wait until dc LDAP response
-until nc -z -w5 "${server}" 389; do
+until nc -z "${server}" 389; do
   echo "Waiting 5 seconds for ${server} LDAP response.."
-  sleep 5
+  sleep 1
 done
 
 if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
