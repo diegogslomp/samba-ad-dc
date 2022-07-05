@@ -7,8 +7,8 @@ set -euo pipefail
 if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
 
   # Wait for network interface
-  until ip a | grep BROADCAST; do
-    echo "Waiting for interface network.."
+  until ip a | grep BROADCAST >/dev/null 2>&1; do
+    echo "Waiting for network interface.."
     sleep 1
   done
   INTERFACE=$(ip a | grep BROADCAST | head -n1 | awk '{print $2}' | sed 's/://')

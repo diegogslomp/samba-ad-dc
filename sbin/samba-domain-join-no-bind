@@ -9,7 +9,7 @@ server="${1}"
 
 # Wait until dc LDAP response
 until nc -z "${server}" 389; do
-  echo "Waiting 5 seconds for ${server} LDAP response.."
+  echo "Waiting for ${server} LDAP response.."
   sleep 1
 done
 
