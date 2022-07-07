@@ -25,5 +25,4 @@ if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
   
 fi
 
-update-etc-resolv-hosts
-update-etc-krb
+update-etc-files

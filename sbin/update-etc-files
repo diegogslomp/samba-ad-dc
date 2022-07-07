@@ -21,3 +21,9 @@ fi
 if ! grep -q "${SEARCH_DOMAIN}" /etc/hosts; then
   echo -e "${SERVER_IP} $(hostname).${SEARCH_DOMAIN} $(hostname)" >>/etc/hosts
 fi
+
+# Change krb5 file with compiled files
+if ! grep -q "${SEARCH_DOMAIN}" /etc/krb5.conf; then
+  # The krb5.conf location is different from mirror and compiled from source files
+  cat "${SAMBA_PATH:-/usr/local/samba}/private/krb5.conf" >/etc/krb5.conf
+fi

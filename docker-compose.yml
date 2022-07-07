@@ -15,14 +15,11 @@ services:
       DOMAIN: DGS
       ADMIN_PASS: Passw0rd
       DNS_FORWARDER: 8.8.8.8
-      SERVER_ROLE: dc
-      DNS_BACKEND: SAMBA_INTERNAL
     command: bash -c "
       set -x &&
-      update-etc-resolv-hosts &&
+      samba-domain-provision-no-bind &&
       echo -e \"172.16.238.20 DC2.dgs.net DC2\" >> /etc/hosts &&
       echo -e \"172.16.238.30 DC3.dgs.net DC3\" >> /etc/hosts &&
-      samba-domain-provision-no-bind &&
       echo -e \"nameserver 172.16.238.20\" >> /etc/resolv.conf &&
       echo -e \"nameserver 172.16.238.30\" >> /etc/resolv.conf &&
       samba -F"
@@ -47,15 +44,12 @@ services:
       DOMAIN: DGS
       ADMIN_PASS: Passw0rd
       DNS_FORWARDER: 8.8.8.8
-      SERVER_ROLE: dc
-      DNS_BACKEND: SAMBA_INTERNAL
       SAMBA_PATH: /var/lib/samba
     command: bash -c "
       set -x &&
-      update-etc-resolv-hosts &&
+      samba-domain-join-no-bind DC1 &&
       echo -e \"172.16.238.10 DC1.dgs.net DC1\" >> /etc/hosts &&
       echo -e \"172.16.238.30 DC3.dgs.net DC3\" >> /etc/hosts &&
-      samba-domain-join-no-bind DC1 &&
       echo -e \"nameserver 172.16.238.10\" >> /etc/resolv.conf &&
       echo -e \"nameserver 172.16.238.30\" >> /etc/resolv.conf &&
       samba -F"
@@ -80,14 +74,11 @@ services:
       DOMAIN: DGS
       ADMIN_PASS: Passw0rd
       DNS_FORWARDER: 8.8.8.8
-      SERVER_ROLE: dc
-      DNS_BACKEND: SAMBA_INTERNAL
     command: bash -c "
       set -x &&
-      update-etc-resolv-hosts &&
+      samba-domain-join-no-bind DC1 &&
       echo -e \"172.16.238.10 DC1.dgs.net DC1\" >> /etc/hosts &&
       echo -e \"172.16.238.20 DC2.dgs.net DC2\" >> /etc/hosts &&
-      samba-domain-join-no-bind DC1 &&
       echo -e \"nameserver 172.16.238.10\" >> /etc/resolv.conf &&
       echo -e \"nameserver 172.16.238.20\" >> /etc/resolv.conf &&     
       samba -F"
