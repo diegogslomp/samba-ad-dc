@@ -7,8 +7,6 @@ set -euo pipefail
 test "${#}" -ge 1 || { echo "Usage: samba-domain-join <server>"; exit 1; }
 server="${1}"
 
-update-etc-resolv-hosts
-
 if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
 
   # Wait until dc LDAP response
@@ -27,4 +25,5 @@ if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
   
 fi
 
+update-etc-resolv-hosts
 update-etc-krb
