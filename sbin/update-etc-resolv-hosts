@@ -3,20 +3,14 @@
 # Exit if any error
 set -euo pipefail
 
-SEARCH_DOMAIN=$(echo "${REALM}" | tr [:upper:] [:lower:])
-
-# Change krb5 file with compiled files
-if grep -qv "${SEARCH_DOMAIN}" /etc/krb5.conf; then
-  # The krb5.conf location is different from mirror and compiled from source files
-  cat "${SAMBA_PATH:-/usr/local/samba}/private/krb5.conf" >/etc/krb5.conf
-fi
-
 # Wait for network interface
 until ip a | grep 'scope global' >/dev/null 2>&1; do
   echo 'Waiting for network interface..'
   sleep 1
 done
+
 SERVER_IP=$(ip a | grep 'scope global' | head -n1 | awk '{print $2}' | awk -F / '{print $1}')
+SEARCH_DOMAIN=$(echo "${REALM}" | tr [:upper:] [:lower:])
 
 # Change resolv.conf based on current network info
 if grep -qv "${SEARCH_DOMAIN}" /etc/resolv.conf; then

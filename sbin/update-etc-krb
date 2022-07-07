@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Exit if any error
+set -euo pipefail
+
+SEARCH_DOMAIN=$(echo "${REALM}" | tr [:upper:] [:lower:])
+
+# Change krb5 file with compiled files
+if grep -qv "${SEARCH_DOMAIN}" /etc/krb5.conf; then
+  # The krb5.conf location is different from mirror and compiled from source files
+  cat "${SAMBA_PATH:-/usr/local/samba}/private/krb5.conf" >/etc/krb5.conf
+fi

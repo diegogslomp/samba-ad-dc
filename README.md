@@ -7,7 +7,6 @@ Samba Active Directory Domain Controller Docker Image
 docker run -d --privileged \
   --restart=always --network=host \
   -e REALM='SAMDOM.EXAMPLE.COM' \
-  -e SEARCH_DOMAIN='samdom.example.com' \
   -e DOMAIN='SAMDOM' \
   -e ADMIN_PASS='Passw0rd' \
   -e DNS_FORWARDER='8.8.8.8' \
