@@ -9,14 +9,15 @@ server="${1}"
 
 update-etc-resolv-hosts
 
-# Wait until dc LDAP response
-until nc -z "${server}" 389; do
-  echo "Waiting for ${server} LDAP response.."
-  sleep 1
-done
-
 if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
+
+  # Wait until dc LDAP response
+  until nc -z "${server}" 389; do
+    echo "Waiting for ${server} LDAP response.."
+    sleep 1
+  done
   INTERFACE=$(ip a | grep BROADCAST | head -n1 | awk '{print $2}' | sed 's/://')
+
   samba-tool domain join "${REALM}" "${SERVER_ROLE:-dc}" \
     --server="${server}" \
     --username=administrator \
@@ -26,6 +27,7 @@ if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
     --option="interfaces=lo ${INTERFACE}" \
     --option="bind interfaces only=yes" || \
   echo "Skipping domain join.."
+  
 fi
 
 update-etc-krb
