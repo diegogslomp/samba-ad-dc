@@ -13,7 +13,6 @@ services:
     privileged: true
     environment:
       REALM: DGS.NET
-      SEARCH_DOMAIN: dgs.net
       DOMAIN: DGS
       ADMIN_PASS: Passw0rd
       DNS_FORWARDER: 8.8.8.8
