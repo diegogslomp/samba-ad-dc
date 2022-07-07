@@ -14,7 +14,7 @@ SEARCH_DOMAIN=$(echo "${REALM}" | tr [:upper:] [:lower:])
 
 # Change resolv.conf based on current network info
 if ! grep -q "${SEARCH_DOMAIN}" /etc/resolv.conf; then
-  echo -e "nameserver ${SERVER_IP}\nsearch ${SEARCH_DOMAIN}" >/etc/resolv.conf
+  echo -e "search ${SEARCH_DOMAIN}\nnameserver ${SERVER_IP}" >/etc/resolv.conf
 fi
 
 # Change /etc/hosts file with current hostname and domain
