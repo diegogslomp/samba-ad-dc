@@ -7,6 +7,8 @@ set -euo pipefail
 test "${#}" -ge 1 || { echo "Usage: samba-domain-join <server>"; exit 1; }
 server="${1}"
 
+update-etc-resolv-hosts
+
 # Wait until dc LDAP response
 until nc -z "${server}" 389; do
   echo "Waiting for ${server} LDAP response.."
@@ -26,4 +28,4 @@ if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
   echo "Skipping domain join.."
 fi
 
-update-etc-files
+update-etc-krb

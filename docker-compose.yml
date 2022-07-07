@@ -19,9 +19,10 @@ services:
       DNS_BACKEND: SAMBA_INTERNAL
     command: bash -c "
       set -x &&
-      samba-domain-provision-no-bind &&
+      update-etc-resolv-hosts &&
       echo -e \"172.16.238.20 DC2.dgs.net DC2\" >> /etc/hosts &&
       echo -e \"172.16.238.30 DC3.dgs.net DC3\" >> /etc/hosts &&
+      samba-domain-provision-no-bind &&
       samba -F"
     volumes:
       - dc1-local-samba:/usr/local/samba
@@ -49,9 +50,10 @@ services:
       SAMBA_PATH: /var/lib/samba
     command: bash -c "
       set -x &&
-      samba-domain-join-no-bind DC1 &&
+      update-etc-resolv-hosts &&
       echo -e \"172.16.238.10 DC1.dgs.net DC1\" >> /etc/hosts &&
       echo -e \"172.16.238.30 DC3.dgs.net DC3\" >> /etc/hosts &&
+      samba-domain-join-no-bind DC1 &&
       samba -F"
     volumes:
       - dc2-lib-samba:/var/lib/samba
@@ -78,9 +80,10 @@ services:
       DNS_BACKEND: SAMBA_INTERNAL
     command: bash -c "
       set -x &&
-      samba-domain-join-no-bind DC1 &&
+      update-etc-resolv-hosts &&
       echo -e \"172.16.238.10 DC1.dgs.net DC1\" >> /etc/hosts &&
       echo -e \"172.16.238.20 DC2.dgs.net DC2\" >> /etc/hosts &&
+      samba-domain-join-no-bind DC1 &&      
       samba -F"
     volumes:
       - dc3-local-samba:/usr/local/samba

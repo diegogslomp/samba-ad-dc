@@ -6,7 +6,7 @@ set -euo pipefail
 SEARCH_DOMAIN=$(echo "${REALM}" | tr [:upper:] [:lower:])
 
 # Change krb5 file with compiled files
-if grep -qv "${SEARCH_DOMAIN}" /etc/krb5.conf; then
+if ! grep -q "${SEARCH_DOMAIN}" /etc/krb5.conf; then
   # The krb5.conf location is different from mirror and compiled from source files
   cat "${SAMBA_PATH:-/usr/local/samba}/private/krb5.conf" >/etc/krb5.conf
 fi
@@ -19,11 +19,11 @@ done
 SERVER_IP=$(ip a | grep 'scope global' | head -n1 | awk '{print $2}' | awk -F / '{print $1}')
 
 # Change resolv.conf based on current network info
-if grep -qv "${SEARCH_DOMAIN}" /etc/resolv.conf; then
+if ! grep -q "${SEARCH_DOMAIN}" /etc/resolv.conf; then
   echo -e "nameserver ${SERVER_IP}\nsearch ${SEARCH_DOMAIN}" >/etc/resolv.conf
 fi
 
 # Change /etc/hosts file with current hostname and domain
-if grep -qv "${SEARCH_DOMAIN}" /etc/hosts; then
+if ! grep -q "${SEARCH_DOMAIN}" /etc/hosts; then
   echo -e "${SERVER_IP} $(hostname).${SEARCH_DOMAIN} $(hostname)" >>/etc/hosts
 fi

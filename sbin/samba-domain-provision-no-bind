@@ -3,6 +3,8 @@
 # Exit if any error
 set -euo pipefail
 
+update-etc-resolv-hosts
+
 # Skip domain provision if secrets exists
 if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
   samba-tool domain provision \
@@ -15,4 +17,4 @@ if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
     --option="dns forwarder=${DNS_FORWARDER}"
 fi
 
-update-etc-files
+update-etc-krb
