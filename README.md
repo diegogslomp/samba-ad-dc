@@ -7,7 +7,7 @@
 
 Samba Active Directory Domain Controller Docker Image
 
-1. Provision a new domain and start [Almalinux image](https://hub.docker.com/r/diegogslomp/samba-ad-dc):
+1. Provision a new domain:
 ```
 docker run -d --privileged \
   --restart=always --network=host \
