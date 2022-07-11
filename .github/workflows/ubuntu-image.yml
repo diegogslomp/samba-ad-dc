@@ -1,4 +1,4 @@
-name: Almalinux Image CI
+name: Ubuntu Image CI
 
 on:
   push:
@@ -10,9 +10,9 @@ jobs:
 
   build:
 
-    runs-on: almalinux-9
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile.almalinux --tag samba-almalinux
+      run: docker build . --file Dockerfile.ubuntu --tag samba-ubuntu

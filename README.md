@@ -1,5 +1,9 @@
 # samba-ad-dc
 
+![gh-actions](https://github.com/diegogslomp/samba-ad-dc/actions/workflows/almalinux-image.yml/badge.svg)
+![gh-actions](https://github.com/diegogslomp/samba-ad-dc/actions/workflows/rockylinux-image.yml/badge.svg)
+![gh-actions](https://github.com/diegogslomp/samba-ad-dc/actions/workflows/ubuntu-image.yml/badge.svg)
+
 Samba Active Directory Domain Controller Docker Image
 
 1. Provision a new domain and start [Almalinux image](https://hub.docker.com/r/diegogslomp/samba-ad-dc):
