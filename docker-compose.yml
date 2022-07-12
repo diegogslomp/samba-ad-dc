@@ -17,7 +17,7 @@ services:
       DNS_FORWARDER: 8.8.8.8
     command: bash -c "
       set -x &&
-      samba-domain-provision-no-bind &&
+      samba-domain-provision-no-bind-interfaces &&
       echo -e \"172.16.238.20 DC2.dgs.net DC2\" >> /etc/hosts &&
       echo -e \"172.16.238.30 DC3.dgs.net DC3\" >> /etc/hosts &&
       echo -e \"nameserver 172.16.238.20\" >> /etc/resolv.conf &&
@@ -47,7 +47,7 @@ services:
       SAMBA_PATH: /var/lib/samba
     command: bash -c "
       set -x &&
-      samba-domain-join-no-bind DC1 &&
+      samba-domain-join-no-bind-interfaces DC1 &&
       echo -e \"172.16.238.10 DC1.dgs.net DC1\" >> /etc/hosts &&
       echo -e \"172.16.238.30 DC3.dgs.net DC3\" >> /etc/hosts &&
       echo -e \"nameserver 172.16.238.10\" >> /etc/resolv.conf &&
@@ -76,11 +76,11 @@ services:
       DNS_FORWARDER: 8.8.8.8
     command: bash -c "
       set -x &&
-      samba-domain-join-no-bind DC1 &&
+      samba-domain-join-no-bind-interfaces DC1 &&
       echo -e \"172.16.238.10 DC1.dgs.net DC1\" >> /etc/hosts &&
       echo -e \"172.16.238.20 DC2.dgs.net DC2\" >> /etc/hosts &&
       echo -e \"nameserver 172.16.238.10\" >> /etc/resolv.conf &&
-      echo -e \"nameserver 172.16.238.20\" >> /etc/resolv.conf &&     
+      echo -e \"nameserver 172.16.238.20\" >> /etc/resolv.conf &&
       samba -F"
     volumes:
       - dc3-local-samba:/usr/local/samba
