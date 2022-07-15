@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM debian
 
 RUN apt update && apt upgrade -y && \
     DEBIAN_FRONTEND=noninteractive \
