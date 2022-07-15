@@ -2,16 +2,33 @@
 
 # Exit if any error
 set -euo pipefail
-# Show commands
-set -x
 
+# Print colored
+_info() {
+  local BLUE='\e[1;34m'
+  local YELLOW='\e[1;33m'
+  local NC='\e[0m'
+  local MESSAGE="$*"
+  printf "${BLUE}# $(hostname):${YELLOW} ${MESSAGE}${NC}\n"
+}
+
+_info 'samba --version'
 samba --version
+_info 'testparm'
 echo -e "\n" | (testparm)
+_info "smbclient -L localhost -U%%"
 smbclient -L localhost -U%
+_info 'smbclient //localhost/netlogon -UAdministrator -c "ls"'
 echo -e "${ADMIN_PASS}\n" | (smbclient //localhost/netlogon -UAdministrator -c 'ls')
 SEARCH_DOMAIN=$(echo "${REALM}" | tr [:upper:] [:lower:])
+_info "nslookup \"$(hostname).${SEARCH_DOMAIN}\""
 nslookup "$(hostname).${SEARCH_DOMAIN}"
+_info "host -t SRV \"_ldap._tcp.${SEARCH_DOMAIN}\""
 host -t SRV "_ldap._tcp.${SEARCH_DOMAIN}"
+_info 'kinit administrator'
 echo -e "${ADMIN_PASS}\n" | (kinit administrator)
+_info 'klist'
 klist
+_info 'wbinfo -u'
 wbinfo -u
+echo ""
