@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     build:
       context: .
-      dockerfile: Dockerfile.almalinux
+      dockerfile: dockerfiles/Dockerfile.almalinux
     container_name: dc1
     hostname: DC1
     privileged: true
@@ -38,7 +38,7 @@ services:
     restart: unless-stopped
     build:
       context: .
-      dockerfile: Dockerfile.ubuntu
+      dockerfile: dockerfiles/Dockerfile.ubuntu
     container_name: dc2
     hostname: DC2
     privileged: true
@@ -69,7 +69,7 @@ services:
     restart: unless-stopped
     build:
       context: .
-      dockerfile: Dockerfile.rockylinux
+      dockerfile: dockerfiles/Dockerfile.rockylinux
     container_name: dc3
     hostname: DC3
     privileged: true
@@ -100,7 +100,7 @@ services:
     restart: unless-stopped
     build:
       context: .
-      dockerfile: Dockerfile.debian
+      dockerfile: dockerfiles/Dockerfile.debian
     container_name: dc4
     hostname: DC4
     privileged: true
