@@ -3,6 +3,6 @@
 # Exit if any error
 set -euo pipefail
 
-test "${#}" -ge 1 || { echo "Usage: samba-domain-demote <server>"; exit 1; }
+[[ "$#" -ge 1 ]] || { echo "Usage: samba-domain-demote <server>"; exit 1; }
 
-samba-tool domain demote --remove-other-dead-server="${1}"
+samba-tool domain demote --remove-other-dead-server="$1"

@@ -4,9 +4,10 @@
 set -euo pipefail
 
 # Require DC as argument
-test "${#}" -ge 1 || { echo "Usage: samba-domain-join <server>"; exit 1; }
-server="${1}"
+[[ "$#" -ge 1 ]] || { echo "Usage: samba-domain-join <server>"; exit 1; }
+server="$1"
 
+# Skip domain join if secrets exists
 if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
 
   # Wait until dc LDAP response
@@ -16,16 +17,29 @@ if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
   done
   INTERFACE=$(ip a | grep BROADCAST | head -n1 | awk '{print $2}' | sed 's/://')
 
-  samba-tool domain join "${REALM}" "${SERVER_ROLE:-dc}" \
-    --server="${server}" \
-    --username=administrator \
-    --password="${ADMIN_PASS}" \
-    --dns-backend="${DNS_BACKEND:-SAMBA_INTERNAL}" \
-    --option="dns forwarder=${DNS_FORWARDER}" \
-    --option="interfaces=lo ${INTERFACE}" \
-    --option="bind interfaces only=yes" || \
-  echo "Skipping domain join.."
-  
+  # Always bind interfaces, but not in tests
+  if [[ "${BIND_NETWORK_INTERFACES:-true}" == true ]]; then
+
+    samba-tool domain join "${REALM}" "${SERVER_ROLE:-dc}" \
+      --server="${server}" \
+      --username=administrator \
+      --password="${ADMIN_PASS}" \
+      --dns-backend="${DNS_BACKEND:-SAMBA_INTERNAL}" \
+      --option="dns forwarder=${DNS_FORWARDER}" \
+      --option="interfaces=lo ${INTERFACE}" \
+      --option="bind interfaces only=yes"
+
+  else
+
+    samba-tool domain join "${REALM}" "${SERVER_ROLE:-dc}" \
+      --server="${server}" \
+      --username=administrator \
+      --password="${ADMIN_PASS}" \
+      --dns-backend="${DNS_BACKEND:-SAMBA_INTERNAL}" \
+      --option="dns forwarder=${DNS_FORWARDER}"
+
+  fi
+
 fi
 
 update-etc-files

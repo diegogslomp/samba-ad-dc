@@ -3,7 +3,7 @@
 # Exit if any error
 set -euo pipefail
 
-# Print colored
+# Colored printf
 _info() {
   local BLUE='\e[1;34m'
   local YELLOW='\e[1;33m'

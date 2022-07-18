@@ -2,7 +2,7 @@
 
 # Exit if any error
 set -euo pipefail
-
+set -x
 # Skip domain provision if secrets exists
 if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
 
@@ -13,16 +13,33 @@ if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
   done
   INTERFACE=$(ip a | grep BROADCAST | head -n1 | awk '{print $2}' | sed 's/://')
 
-  samba-tool domain provision \
-    --server-role="${SERVER_ROLE:-dc}" \
-    --use-rfc2307 \
-    --dns-backend="${DNS_BACKEND:-SAMBA_INTERNAL}" \
-    --realm="${REALM}" \
-    --domain="${DOMAIN}" \
-    --adminpass="${ADMIN_PASS}" \
-    --option="dns forwarder=${DNS_FORWARDER}" \
-    --option="interfaces=lo ${INTERFACE}" \
-    --option="bind interfaces only=yes"
+  # Always bind interfaces, but not in tests
+  if [[ "${BIND_NETWORK_INTERFACES:-true}" == true ]]; then
+
+    samba-tool domain provision \
+      --server-role="${SERVER_ROLE:-dc}" \
+      --use-rfc2307 \
+      --dns-backend="${DNS_BACKEND:-SAMBA_INTERNAL}" \
+      --realm="${REALM}" \
+      --domain="${DOMAIN}" \
+      --adminpass="${ADMIN_PASS}" \
+      --option="dns forwarder=${DNS_FORWARDER}" \
+      --option="interfaces=lo ${INTERFACE}" \
+      --option="bind interfaces only=yes"
+
+  else
+
+    samba-tool domain provision \
+      --server-role="${SERVER_ROLE:-dc}" \
+      --use-rfc2307 \
+      --dns-backend="${DNS_BACKEND:-SAMBA_INTERNAL}" \
+      --realm="${REALM}" \
+      --domain="${DOMAIN}" \
+      --adminpass="${ADMIN_PASS}" \
+      --option="dns forwarder=${DNS_FORWARDER}"
+
+  fi
+
 fi
 
 update-etc-files
