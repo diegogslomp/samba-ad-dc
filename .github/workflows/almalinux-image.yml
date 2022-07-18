@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile.almalinux --tag samba-almalinux
+      run: docker build . --file dockerfiles/Dockerfile.almalinux --tag samba-almalinux
