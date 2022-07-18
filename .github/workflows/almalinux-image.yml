@@ -1,4 +1,4 @@
-name: Almalinux Image CI
+name: Almalinux
 
 on:
   push:

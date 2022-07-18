@@ -1,4 +1,4 @@
-name: Rockylinux Image CI
+name: Rockylinux
 
 on:
   push:
