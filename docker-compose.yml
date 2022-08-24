@@ -7,6 +7,8 @@ services:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile.almalinux
+      args:
+        SMB_VERSION: "4.16.4"
     container_name: dc1
     hostname: DC1
     privileged: true
@@ -39,6 +41,8 @@ services:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile.ubuntu
+      args:
+        SMB_VERSION: "4.16.4"
     container_name: dc2
     hostname: DC2
     privileged: true
@@ -70,6 +74,8 @@ services:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile.rockylinux
+      args:
+        SMB_VERSION: "4.16.4"
     container_name: dc3
     hostname: DC3
     privileged: true
@@ -101,6 +107,8 @@ services:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile.debian
+      args:
+        SMB_VERSION: "4.16.4"
     container_name: dc4
     hostname: DC4
     privileged: true

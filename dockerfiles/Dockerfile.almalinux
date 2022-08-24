@@ -15,7 +15,7 @@ RUN yum update -y && \
   iproute netcat -y && \
   yum clean all -y
 
-ENV SMB_VERSION latest
+ARG SMB_VERSION latest
 ENV PATH /usr/local/samba/bin:/usr/local/samba/sbin:$PATH
 ENV LC_CTYPE C.UTF-8
 ENV LC_MESSAGES C.UTF-8
