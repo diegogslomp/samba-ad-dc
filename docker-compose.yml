@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     build:
       context: .
-      dockerfile: dockerfiles/Dockerfile.almalinux
+      dockerfile: dockerfiles/almalinux
       args:
         SMB_VERSION: "4.16.4"
     container_name: dc1
@@ -44,7 +44,7 @@ services:
     restart: unless-stopped
     build:
       context: .
-      dockerfile: dockerfiles/Dockerfile.ubuntu
+      dockerfile: dockerfiles/ubuntu
       args:
         SMB_VERSION: "4.16.4"
     container_name: dc2
@@ -81,7 +81,7 @@ services:
     restart: unless-stopped
     build:
       context: .
-      dockerfile: dockerfiles/Dockerfile.rockylinux
+      dockerfile: dockerfiles/rockylinux
       args:
         SMB_VERSION: "4.16.4"
     container_name: dc3
@@ -118,7 +118,7 @@ services:
     restart: unless-stopped
     build:
       context: .
-      dockerfile: dockerfiles/Dockerfile.debian
+      dockerfile: dockerfiles/debian
       args:
         SMB_VERSION: "4.16.4"
     container_name: dc4
