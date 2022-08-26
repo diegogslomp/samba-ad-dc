@@ -18,15 +18,18 @@ services:
       ADMIN_PASS: Passw0rd
       DNS_FORWARDER: 8.8.8.8
       BIND_NETWORK_INTERFACES: false
+    dns_search: dgs.net
+    dns:
+      - 172.16.238.10
+      - 172.16.238.20
+      - 172.16.238.30
+      - 172.16.238.40
     command: bash -c "
-      set -x &&
-      samba-domain-provision &&
+      echo -e \"172.16.238.10 DC1.dgs.net DC1\" >> /etc/hosts &&
       echo -e \"172.16.238.20 DC2.dgs.net DC2\" >> /etc/hosts &&
       echo -e \"172.16.238.30 DC3.dgs.net DC3\" >> /etc/hosts &&
       echo -e \"172.16.238.40 DC4.dgs.net DC4\" >> /etc/hosts &&
-      echo -e \"nameserver 172.16.238.20\" >> /etc/resolv.conf &&
-      echo -e \"nameserver 172.16.238.30\" >> /etc/resolv.conf &&
-      echo -e \"nameserver 172.16.238.40\" >> /etc/resolv.conf &&
+      samba-domain-provision &&
       samba -F"
     volumes:
       - dc1-local-samba:/usr/local/samba
@@ -52,15 +55,18 @@ services:
       ADMIN_PASS: Passw0rd
       DNS_FORWARDER: 8.8.8.8
       BIND_NETWORK_INTERFACES: false
+    dns_search: dgs.net
+    dns:
+      - 172.16.238.20
+      - 172.16.238.30
+      - 172.16.238.40
+      - 172.16.238.10
     command: bash -c "
-      set -x &&
-      samba-domain-join DC1 &&
       echo -e \"172.16.238.10 DC1.dgs.net DC1\" >> /etc/hosts &&
+      echo -e \"172.16.238.20 DC2.dgs.net DC2\" >> /etc/hosts &&
       echo -e \"172.16.238.30 DC3.dgs.net DC3\" >> /etc/hosts &&
       echo -e \"172.16.238.40 DC4.dgs.net DC4\" >> /etc/hosts &&
-      echo -e \"nameserver 172.16.238.10\" >> /etc/resolv.conf &&
-      echo -e \"nameserver 172.16.238.30\" >> /etc/resolv.conf &&
-      echo -e \"nameserver 172.16.238.40\" >> /etc/resolv.conf &&
+      samba-domain-join DC1 &&
       samba -F"
     volumes:
       - dc2-local-samba:/usr/local/samba
@@ -85,15 +91,18 @@ services:
       ADMIN_PASS: Passw0rd
       DNS_FORWARDER: 8.8.8.8
       BIND_NETWORK_INTERFACES: false
+    dns_search: dgs.net
+    dns:
+      - 172.16.238.30
+      - 172.16.238.40
+      - 172.16.238.10
+      - 172.16.238.20
     command: bash -c "
-      set -x &&
-      samba-domain-join DC1 &&
       echo -e \"172.16.238.10 DC1.dgs.net DC1\" >> /etc/hosts &&
       echo -e \"172.16.238.20 DC2.dgs.net DC2\" >> /etc/hosts &&
+      echo -e \"172.16.238.30 DC3.dgs.net DC3\" >> /etc/hosts &&
       echo -e \"172.16.238.40 DC4.dgs.net DC4\" >> /etc/hosts &&
-      echo -e \"nameserver 172.16.238.10\" >> /etc/resolv.conf &&
-      echo -e \"nameserver 172.16.238.20\" >> /etc/resolv.conf &&
-      echo -e \"nameserver 172.16.238.40\" >> /etc/resolv.conf &&
+      samba-domain-join DC1 &&
       samba -F"
     volumes:
       - dc3-local-samba:/usr/local/samba
@@ -118,15 +127,18 @@ services:
       ADMIN_PASS: Passw0rd
       DNS_FORWARDER: 8.8.8.8
       BIND_NETWORK_INTERFACES: false
+    dns_search: dgs.net
+    dns:
+      - 172.16.238.40
+      - 172.16.238.10
+      - 172.16.238.20
+      - 172.16.238.30
     command: bash -c "
-      set -x &&
-      samba-domain-join DC1 &&
       echo -e \"172.16.238.10 DC1.dgs.net DC1\" >> /etc/hosts &&
       echo -e \"172.16.238.20 DC2.dgs.net DC2\" >> /etc/hosts &&
       echo -e \"172.16.238.30 DC3.dgs.net DC3\" >> /etc/hosts &&
-      echo -e \"nameserver 172.16.238.10\" >> /etc/resolv.conf &&
-      echo -e \"nameserver 172.16.238.20\" >> /etc/resolv.conf &&
-      echo -e \"nameserver 172.16.238.30\" >> /etc/resolv.conf &&
+      echo -e \"172.16.238.40 DC4.dgs.net DC4\" >> /etc/hosts &&
+      samba-domain-join DC1 &&
       samba -F"
     volumes:
       - dc4-local-samba:/usr/local/samba
