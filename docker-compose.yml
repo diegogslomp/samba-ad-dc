@@ -24,11 +24,12 @@ services:
       - 172.16.238.20
       - 172.16.238.30
       - 172.16.238.40
+    extra_hosts:
+      - "DC1 DC1.dgs.net:172.16.238.10"
+      - "DC2 DC2.dgs.net:172.16.238.20"
+      - "DC3 DC3.dgs.net:172.16.238.30"
+      - "DC4 DC4.dgs.net:172.16.238.40"
     command: bash -c "
-      echo -e \"172.16.238.10 DC1.dgs.net DC1\" >> /etc/hosts &&
-      echo -e \"172.16.238.20 DC2.dgs.net DC2\" >> /etc/hosts &&
-      echo -e \"172.16.238.30 DC3.dgs.net DC3\" >> /etc/hosts &&
-      echo -e \"172.16.238.40 DC4.dgs.net DC4\" >> /etc/hosts &&
       samba-domain-provision &&
       samba -F"
     volumes:
@@ -61,11 +62,12 @@ services:
       - 172.16.238.30
       - 172.16.238.40
       - 172.16.238.10
+    extra_hosts:
+      - "DC1 DC1.dgs.net:172.16.238.10"
+      - "DC2 DC2.dgs.net:172.16.238.20"
+      - "DC3 DC3.dgs.net:172.16.238.30"
+      - "DC4 DC4.dgs.net:172.16.238.40"
     command: bash -c "
-      echo -e \"172.16.238.10 DC1.dgs.net DC1\" >> /etc/hosts &&
-      echo -e \"172.16.238.20 DC2.dgs.net DC2\" >> /etc/hosts &&
-      echo -e \"172.16.238.30 DC3.dgs.net DC3\" >> /etc/hosts &&
-      echo -e \"172.16.238.40 DC4.dgs.net DC4\" >> /etc/hosts &&
       samba-domain-join DC1 &&
       samba -F"
     volumes:
@@ -97,11 +99,12 @@ services:
       - 172.16.238.40
       - 172.16.238.10
       - 172.16.238.20
+    extra_hosts:
+      - "DC1 DC1.dgs.net:172.16.238.10"
+      - "DC2 DC2.dgs.net:172.16.238.20"
+      - "DC3 DC3.dgs.net:172.16.238.30"
+      - "DC4 DC4.dgs.net:172.16.238.40"
     command: bash -c "
-      echo -e \"172.16.238.10 DC1.dgs.net DC1\" >> /etc/hosts &&
-      echo -e \"172.16.238.20 DC2.dgs.net DC2\" >> /etc/hosts &&
-      echo -e \"172.16.238.30 DC3.dgs.net DC3\" >> /etc/hosts &&
-      echo -e \"172.16.238.40 DC4.dgs.net DC4\" >> /etc/hosts &&
       samba-domain-join DC1 &&
       samba -F"
     volumes:
@@ -133,11 +136,12 @@ services:
       - 172.16.238.10
       - 172.16.238.20
       - 172.16.238.30
+    extra_hosts:
+      - "DC1 DC1.dgs.net:172.16.238.10"
+      - "DC2 DC2.dgs.net:172.16.238.20"
+      - "DC3 DC3.dgs.net:172.16.238.30"
+      - "DC4 DC4.dgs.net:172.16.238.40"
     command: bash -c "
-      echo -e \"172.16.238.10 DC1.dgs.net DC1\" >> /etc/hosts &&
-      echo -e \"172.16.238.20 DC2.dgs.net DC2\" >> /etc/hosts &&
-      echo -e \"172.16.238.30 DC3.dgs.net DC3\" >> /etc/hosts &&
-      echo -e \"172.16.238.40 DC4.dgs.net DC4\" >> /etc/hosts &&
       samba-domain-join DC1 &&
       samba -F"
     volumes:
