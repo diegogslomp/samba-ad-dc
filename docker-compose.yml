@@ -17,7 +17,7 @@ services:
       DOMAIN: DGS
       ADMIN_PASS: Passw0rd
       DNS_FORWARDER: 8.8.8.8
-      BIND_NETWORK_INTERFACES: false
+      BIND_NETWORK_INTERFACES: "false"
     dns_search: dgs.net
     dns:
       - 172.16.238.10
@@ -55,7 +55,7 @@ services:
       DOMAIN: DGS
       ADMIN_PASS: Passw0rd
       DNS_FORWARDER: 8.8.8.8
-      BIND_NETWORK_INTERFACES: false
+      BIND_NETWORK_INTERFACES: "false"
     dns_search: dgs.net
     dns:
       - 172.16.238.20
@@ -92,7 +92,7 @@ services:
       DOMAIN: DGS
       ADMIN_PASS: Passw0rd
       DNS_FORWARDER: 8.8.8.8
-      BIND_NETWORK_INTERFACES: false
+      BIND_NETWORK_INTERFACES: "false"
     dns_search: dgs.net
     dns:
       - 172.16.238.30
@@ -129,7 +129,7 @@ services:
       DOMAIN: DGS
       ADMIN_PASS: Passw0rd
       DNS_FORWARDER: 8.8.8.8
-      BIND_NETWORK_INTERFACES: false
+      BIND_NETWORK_INTERFACES: "false"
     dns_search: dgs.net
     dns:
       - 172.16.238.40
