@@ -30,6 +30,8 @@ if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
       --option="interfaces=lo ${INTERFACE}" \
       --option="bind interfaces only=yes"
 
+
+
   else
 
     samba-tool domain provision \
@@ -42,6 +44,21 @@ if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
       --option="dns forwarder=${DNS_FORWARDER}"
 
   fi
+
+
+  IFS=$(echo -en "\n\b")
+
+  for row in $(cat /usr/local/sambaconfig/seedData | jq -r '.groups[]'); do
+    samba-tool group add $row
+  done
+
+  for row in $(cat /usr/local/sambaconfig/seedData | jq -c '.users[]'); do 
+    eval $(echo $row | jq -r '"name="+(.name | @sh),"password="+(.password | @sh)')
+    samba-tool user add $name $password
+    for groupRow in $(echo $row | jq -r '.groups[]'); do
+      samba-tool group addmembers $(echo $groupRow | tr -d '"') $name
+    done
+  done
 
 fi
 

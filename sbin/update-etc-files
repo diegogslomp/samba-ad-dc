@@ -27,3 +27,9 @@ if ! grep -q "${SEARCH_DOMAIN}" /etc/krb5.conf; then
   # The krb5.conf location is different from mirror and compiled from source files
   cat "${SAMBA_PATH:-/usr/local/samba}/private/krb5.conf" >/etc/krb5.conf
 fi
+
+# Allow LDAP connections over non-tls connections
+sed -i 's/\[global\]/[global]\n\tldap server require strong auth = no/' /usr/local/samba/etc/smb.conf
+
+# Bind to all interfaces
+sed -i 's/bind interfaces only = Yes/bind interfaces only = no/' /usr/local/samba/etc/smb.conf

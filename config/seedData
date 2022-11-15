@@ -1,0 +1,10 @@
+{
+	"users":[
+		{"groups":["Alfred_Users"],"name":"user","password":"StrongUserPassword1!"},
+		{"groups":["Alfred_Users","Alfred_PMs"],"name":"manager","password":"StrongUserPassword1!"}
+	],
+	"groups":[
+		"Alfred_Users",
+		"Alfred_PMs"
+	]
+}
