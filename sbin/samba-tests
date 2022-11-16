@@ -14,21 +14,39 @@ _info() {
 
 _info 'samba --version'
 samba --version
+
 _info 'testparm'
 echo -e "\n" | (testparm)
+
 _info "smbclient -L localhost -U%%"
 smbclient -L localhost -U%
+
 _info 'smbclient //localhost/netlogon -UAdministrator -c "ls"'
 echo -e "${ADMIN_PASS}\n" | (smbclient //localhost/netlogon -UAdministrator -c 'ls')
+
 SEARCH_DOMAIN=$(echo "${REALM}" | tr [:upper:] [:lower:])
+
 _info "nslookup \"$(hostname).${SEARCH_DOMAIN}\""
 nslookup "$(hostname).${SEARCH_DOMAIN}"
+
 _info "host -t SRV \"_ldap._tcp.${SEARCH_DOMAIN}\""
 host -t SRV "_ldap._tcp.${SEARCH_DOMAIN}"
+
 _info 'kinit administrator'
 echo -e "${ADMIN_PASS}\n" | (kinit administrator)
+
 _info 'klist'
 klist
+
 _info 'wbinfo -u'
 wbinfo -u
+
+_info 'ldapsearch -xLLL -s base namingContexts'
+ldapsearch -xLLL -s base namingContexts
+
+SEARCH_BASE=$(echo dc=${SEARCH_DOMAIN} | sed "s/\./,dc=/g")
+
+_info "ldapsearch -xLLL -b \"cn=administrator,cn=users,${SEARCH_BASE}\" -D \"cn=administrator,cn=users,${SEARCH_BASE}\""
+ldapsearch -xLLL -b "cn=administrator,cn=users,${SEARCH_BASE}" -D "cn=administrator,cn=users,${SEARCH_BASE}" -w "${ADMIN_PASS}"
+
 echo ""

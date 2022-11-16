@@ -12,7 +12,7 @@ RUN yum update -y && \
   python3-dns python3-gpg python3-devel readline-devel rpcgen systemd-devel \
   tar zlib-devel \
   bind-utils flex dbus-devel libtirpc-devel python3-markdown bison perl-JSON \
-  iproute netcat -y && \
+  iproute netcat jq openldap-clients -y && \
   yum clean all -y
 
 ARG SMB_VERSION=latest
