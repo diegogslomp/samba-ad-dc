@@ -4,18 +4,11 @@ set -x
 
 repo="diegogslomp/samba-ad-dc"
 
-# Update ubuntu, debian and rockylinux tags
-# for tag in ubuntu debian rockylinux; do
-#   docker tag "samba:${tag}" "${repo}:${tag}"
-#   docker push "${repo}:${tag}"
-#   docker rmi "${repo}:${tag}"
-# done
-
 # Get samba version from last almalinux
 version=$(docker run --rm samba:almalinux samba --version | awk '{ print $2 }')
 
 # Update almalinux (main) tags
-for tag in almalinux "${version}" latest; do
+for tag in "${version}" almalinux latest; do
   docker tag samba:almalinux "${repo}:${tag}"
   docker push "${repo}:${tag}"
   docker rmi "${repo}:${tag}"
