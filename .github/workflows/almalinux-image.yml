@@ -1,4 +1,4 @@
-name: Almalinux
+name: almalinux
 
 on:
   push:

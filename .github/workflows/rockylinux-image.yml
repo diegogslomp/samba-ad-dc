@@ -1,4 +1,4 @@
-name: Rockylinux
+name: rockylinux
 
 on:
   push:

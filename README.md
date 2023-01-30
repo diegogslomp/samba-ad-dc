@@ -4,7 +4,8 @@
 [![gh-actions](https://github.com/diegogslomp/samba-ad-dc/actions/workflows/rockylinux-image.yml/badge.svg)](https://github.com/diegogslomp/samba-ad-dc/actions/workflows/rockylinux-image.yml)
 [![gh-actions](https://github.com/diegogslomp/samba-ad-dc/actions/workflows/debian-image.yml/badge.svg)](https://github.com/diegogslomp/samba-ad-dc/actions/workflows/debian-image.yml)
 [![gh-actions](https://github.com/diegogslomp/samba-ad-dc/actions/workflows/ubuntu-image.yml/badge.svg)](https://github.com/diegogslomp/samba-ad-dc/actions/workflows/ubuntu-image.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/github/license/diegogslomp/samba-ad-dc)](https://github.com/diegogslomp/samba-ad-dc/blob/master/LICENSE)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/diegogslomp/samba-ad-dc)](https://github.com/diegogslomp/samba-ad-dc/releases)
 
 Samba Active Directory Domain Controller Docker Image
 
@@ -20,13 +21,13 @@ docker run -d --privileged \
   --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
 ```
 
-2. Show logs (Ctrl+c to exit) and run tests:
+1. Show logs (Ctrl+c to exit) and run tests:
 ```
 docker logs dc1 -f
 docker exec dc1 samba-tests
 ```
 
-3. For multiple DCs testing:
+1. For multiple DCs testing:
 ```
 git clone --single-branch https://github.com/diegogslomp/samba-ad-dc
 cd samba-ad-dc
