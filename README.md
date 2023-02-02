@@ -5,7 +5,6 @@
 [![gh-actions](https://github.com/diegogslomp/samba-ad-dc/actions/workflows/debian-image.yml/badge.svg)](https://github.com/diegogslomp/samba-ad-dc/actions/workflows/debian-image.yml)
 [![gh-actions](https://github.com/diegogslomp/samba-ad-dc/actions/workflows/ubuntu-image.yml/badge.svg)](https://github.com/diegogslomp/samba-ad-dc/actions/workflows/ubuntu-image.yml)
 [![License: MIT](https://img.shields.io/github/license/diegogslomp/samba-ad-dc)](https://github.com/diegogslomp/samba-ad-dc/blob/master/LICENSE)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/diegogslomp/samba-ad-dc)](https://github.com/diegogslomp/samba-ad-dc/releases)
 
 Samba Active Directory Domain Controller Docker Image
 
