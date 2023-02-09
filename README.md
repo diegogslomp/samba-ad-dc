@@ -4,7 +4,6 @@
 [![gh-actions](https://github.com/diegogslomp/samba-ad-dc/actions/workflows/rockylinux-image.yml/badge.svg)](https://github.com/diegogslomp/samba-ad-dc/actions/workflows/rockylinux-image.yml)
 [![gh-actions](https://github.com/diegogslomp/samba-ad-dc/actions/workflows/debian-image.yml/badge.svg)](https://github.com/diegogslomp/samba-ad-dc/actions/workflows/debian-image.yml)
 [![gh-actions](https://github.com/diegogslomp/samba-ad-dc/actions/workflows/ubuntu-image.yml/badge.svg)](https://github.com/diegogslomp/samba-ad-dc/actions/workflows/ubuntu-image.yml)
-[![License: GNU GPLv3](https://img.shields.io/github/license/diegogslomp/samba-ad-dc)](https://github.com/diegogslomp/samba-ad-dc/blob/master/LICENSE)
 
 Samba Active Directory Domain Controller Docker Image
 
