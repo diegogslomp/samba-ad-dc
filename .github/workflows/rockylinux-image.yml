@@ -2,17 +2,21 @@ name: rockylinux
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
+    paths-ignore:
+      - "README.md"
+      - "dev/**"
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
+    paths-ignore:
+      - "README.md"
+      - "dev/**"
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file dockerfiles/rockylinux --tag samba-rockylinux
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: docker build . --file dockerfiles/rockylinux --tag samba-rockylinux
