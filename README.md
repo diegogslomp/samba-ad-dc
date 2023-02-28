@@ -7,7 +7,7 @@
 
 Samba Active Directory Domain Controller Docker Image
 
-1. Provision a new domain:
+Provision a new domain:
 ```
 docker run -d --privileged \
   --restart=unless-stopped --network=host \
@@ -19,13 +19,13 @@ docker run -d --privileged \
   --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
 ```
 
-1. Show logs (Ctrl+c to exit) and run tests:
+Show logs (Ctrl+c to exit) and run tests:
 ```
 docker logs dc1 -f
 docker exec dc1 samba-tests
 ```
 
-1. For multiple DCs testing:
+For multiple DCs testing:
 ```
 git clone --single-branch https://github.com/diegogslomp/samba-ad-dc
 cd samba-ad-dc
