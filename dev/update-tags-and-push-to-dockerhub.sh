@@ -10,6 +10,7 @@ version=$(docker run --rm samba:almalinux samba --version | awk '{ print $2 }')
 # Update arm64
 docker tag samba:arm64 "${repo}:arm64"
 docker push "${repo}:arm64"
+docker rmi "${repo}:arm64"
 
 # Update almalinux (main) tags
 for tag in amd64 almalinux "${version}"; do
