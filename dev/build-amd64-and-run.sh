@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -eo pipefail
 set -x
 
-export SMB_VERSION=$(dev/latest-published-samba.sh)
+if [[ -z "$SMB_VERSION" ]]; then
+  SMB_VERSION=$(dev/latest-published-samba.sh)
+fi
+export SMB_VERSION
 
 docker compose down -v
 docker compose build
