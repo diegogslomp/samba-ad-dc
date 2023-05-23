@@ -7,7 +7,4 @@ if [[ -z "$SMB_VERSION" ]]; then
 fi
 export SMB_VERSION
 
-docker compose down -v
 docker compose build
-docker compose up -d
-docker compose logs -f
