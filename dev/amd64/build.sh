@@ -7,4 +7,4 @@ if [[ -z "$SMB_VERSION" ]]; then
 fi
 export SMB_VERSION
 
-docker compose build
+docker compose build --no-cache
