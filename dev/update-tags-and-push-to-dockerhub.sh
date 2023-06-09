@@ -5,7 +5,11 @@ set -x
 repo="diegogslomp/samba-ad-dc"
 
 # Get samba version from last almalinux
-version=$(docker run --rm samba:almalinux samba --version | awk '{ print $2 }')
+if [[ -z "$SMB_VERSION" ]]; then
+  version=$(docker run --rm samba:almalinux samba --version | awk '{ print $2 }')
+fi
+version=$SMB_VERSION
+
 
 # Update arm64
 docker tag samba:arm64 "${repo}:arm64"
@@ -20,6 +24,7 @@ for tag in amd64 almalinux "${version}"; do
 done
 
 # Update manifest to accept amd64 and arm64 as latest
+docker manifest rm diegogslomp/samba-ad-dc:latest || true
 docker manifest create \
   diegogslomp/samba-ad-dc:latest \
   diegogslomp/samba-ad-dc:amd64 \
