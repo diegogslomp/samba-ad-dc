@@ -37,7 +37,7 @@ docker logs dc1 -f
 docker exec dc1 samba-tests
 ```
 
-5. For multiple DCs testing
+5. For multiple DCs testing (no external access)
 ```
 git clone --single-branch https://github.com/diegogslomp/samba-ad-dc
 cd samba-ad-dc
@@ -47,7 +47,7 @@ docker compose logs -f
 for dc in dc{1,2,3,4}; do docker compose exec $dc samba-tests; done
 ```
 
-6. TODO
+6. To-Do
  - [Sysvol replication workaround](https://wiki.samba.org/index.php/Rsync_based_SysVol_replication_workaround)
 
 7. Links
