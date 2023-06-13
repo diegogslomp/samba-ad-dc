@@ -7,7 +7,7 @@
 
 Samba Active Directory Domain Controller Docker Image
 
-Provision a new domain:
+1. Provision a new domain:
 ```
 docker run -d --privileged \
   --restart=unless-stopped --network=host \
@@ -19,13 +19,25 @@ docker run -d --privileged \
   --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
 ```
 
-Show logs (Ctrl+c to exit) and run tests:
+2. Update host `/etc/resolv.conf` DNS info, replacing `host_ip`:
+```
+search samdom.example.com
+nameserver host_ip
+```
+
+3. Add new host to `etc/hosts`, replacing `host_ip`:
+```
+127.0.0.1     localhost
+host_ip     DC1.samdom.example.com     DC1
+```
+
+4. Show logs (Ctrl+c to exit) and run tests:
 ```
 docker logs dc1 -f
 docker exec dc1 samba-tests
 ```
 
-For multiple DCs testing:
+5. For multiple DCs testing:
 ```
 git clone --single-branch https://github.com/diegogslomp/samba-ad-dc
 cd samba-ad-dc
@@ -35,7 +47,7 @@ docker compose logs -f
 for dc in dc{1,2,3,4}; do docker compose exec $dc samba-tests; done
 ```
 
-TODO:
+6. TODO:
 
   - [ ] [Sysvol replication workaround](https://wiki.samba.org/index.php/Rsync_based_SysVol_replication_workaround)
 
