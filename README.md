@@ -48,11 +48,9 @@ for dc in dc{1,2,3,4}; do docker compose exec $dc samba-tests; done
 ```
 
 6. TODO:
+ - [Sysvol replication workaround](https://wiki.samba.org/index.php/Rsync_based_SysVol_replication_workaround)
 
-  - [ ] [Sysvol replication workaround](https://wiki.samba.org/index.php/Rsync_based_SysVol_replication_workaround)
-
-Official site: https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_Domain_Controller
-
-Dependencies: https://wiki.samba.org/index.php/Package_Dependencies_Required_to_Build_Samba
-
-Exposed ports: https://wiki.samba.org/index.php/Samba_AD_DC_Port_Usage
+7. Links:
+ - [Setting up](https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_Domain_Controller)
+ - [Dependencies](https://wiki.samba.org/index.php/Package_Dependencies_Required_to_Build_Samba)
+ - [Exposed ports](https://wiki.samba.org/index.php/Samba_AD_DC_Port_Usage)
