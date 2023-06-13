@@ -28,7 +28,7 @@ nameserver host_ip
 3. Add new host to `etc/hosts`, replacing `host_ip`:
 ```
 127.0.0.1     localhost
-host_ip     DC1.samdom.example.com     DC1
+host_ip       DC1.samdom.example.com     DC1
 ```
 
 4. Show logs (Ctrl+c to exit) and run tests:
