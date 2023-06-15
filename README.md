@@ -19,19 +19,19 @@ docker run -d --privileged \
   --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
 ```
 
-2. Update host `/etc/resolv.conf` DNS info, replacing `host_ip`
+2. Update `/etc/resolv.conf` DNS info, replacing `host_ip`
 ```
 search samdom.example.com
 nameserver host_ip
 ```
 
-3. Add new host to `etc/hosts`, replacing `host_ip`
+3. Update `/etc/hosts`
 ```
 127.0.0.1     localhost
 host_ip       DC1.samdom.example.com     DC1
 ```
 
-4. Show logs (Ctrl+c to exit) and run tests
+4. Show logs and run tests
 ```
 docker logs dc1 -f
 docker exec dc1 samba-tests
