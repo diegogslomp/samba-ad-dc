@@ -19,25 +19,24 @@ docker run -d --privileged \
   --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
 ```
 
-2. Update `/etc/resolv.conf` DNS info, replacing `host_ip`
-```
-search samdom.example.com
-nameserver host_ip
-```
-
-3. Update `/etc/hosts`
-```
-127.0.0.1     localhost
-host_ip       DC1.samdom.example.com     DC1
-```
-
-4. Show logs and run tests
+2. Show logs and run tests
 ```
 docker logs dc1 -f
 docker exec dc1 samba-tests
 ```
 
-5. For multiple DCs testing (no external access)
+3. For external access, update `/etc/resolv.conf` DNS info and add host to `/etc/hosts` , replacing `host_ip`
+```
+# /etc/resolv.conf
+search samdom.example.com
+nameserver host_ip
+
+# /etc/hosts
+127.0.0.1     localhost
+host_ip       DC1.samdom.example.com     DC1
+```
+
+4. For multiple DCs testing (no external access)
 ```
 git clone --single-branch https://github.com/diegogslomp/samba-ad-dc
 cd samba-ad-dc
@@ -47,7 +46,7 @@ docker compose logs -f
 for dc in dc{1,2,3,4}; do docker compose exec $dc samba-tests; done
 ```
 
-6. To-Do
+5. To-Do
  - [Sysvol replication workaround](https://wiki.samba.org/index.php/Rsync_based_SysVol_replication_workaround)
 
 7. Links
