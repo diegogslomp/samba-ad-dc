@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -eo pipefail
 set -x
 
 repo="diegogslomp/samba-ad-dc"
 
 # Get samba version from last almalinux
 if [[ -z "$SMB_VERSION" ]]; then
-  version=$(docker run --rm samba:almalinux samba --version | awk '{ print $2 }')
+  SMB_VERSION=$(docker run --rm samba:almalinux samba --version | awk '{ print $2 }')
 fi
 version=$SMB_VERSION
 
