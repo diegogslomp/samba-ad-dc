@@ -25,7 +25,7 @@ docker logs dc1 -f
 docker exec dc1 samba-tests
 ```
 
-3. For external access, update the `/etc/resolv.conf` and `/etc/hosts` from your host, replacing the `host_ip`
+3. For external access, update the `/etc/resolv.conf` and `/etc/hosts` from your host, replacing `host_ip`
 ```
 # /etc/resolv.conf
 search samdom.example.com
