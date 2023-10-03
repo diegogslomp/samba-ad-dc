@@ -25,7 +25,7 @@ docker logs dc1 -f
 docker exec dc1 samba-tests
 ```
 
-3. Update `/etc/resolv.conf` DNS info and add host to `/etc/hosts` , replacing `host_ip`
+3. For external access, update the `/etc/resolv.conf` and `/etc/hosts` from your host, replacing `host_ip`
 ```
 # /etc/resolv.conf
 search samdom.example.com
@@ -36,7 +36,7 @@ nameserver host_ip
 host_ip       DC1.samdom.example.com     DC1
 ```
 
-4. For multiple DCs testing (no external access)
+4. For multiple dc testing (no external access)
 ```
 git clone --single-branch https://github.com/diegogslomp/samba-ad-dc
 cd samba-ad-dc
