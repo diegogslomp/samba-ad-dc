@@ -15,7 +15,9 @@ docker run -d --privileged \
   -e DOMAIN='SAMDOM' \
   -e ADMIN_PASS='Passw0rd' \
   -e DNS_FORWARDER='8.8.8.8' \
-  -v dc1-samba:/usr/local/samba \
+  -v dc1-etc:/usr/local/samba/etc \
+  -v dc1-private:/usr/local/samba/private \
+  -v dc1-var:/usr/local/samba/var \
   --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
 ```
 

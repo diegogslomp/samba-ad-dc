@@ -31,7 +31,9 @@ services:
       - "DC4 DC4.dgs.net:172.16.238.40"
     command: bash -c "samba-domain-provision && samba -F"
     volumes:
-      - dc1-local-samba:/usr/local/samba
+      - dc1-etc:/usr/local/samba/etc
+      - dc1-private:/usr/local/samba/private
+      - dc1-var:/usr/local/samba/var
 
     networks:
       static-network:
@@ -67,7 +69,9 @@ services:
       - "DC4 DC4.dgs.net:172.16.238.40"
     command: bash -c "samba-domain-join DC1 && samba -F"
     volumes:
-      - dc2-local-samba:/usr/local/samba
+      - dc2-etc:/usr/local/samba/etc
+      - dc2-private:/usr/local/samba/private
+      - dc2-var:/usr/local/samba/var
     networks:
       static-network:
         ipv4_address: 172.16.238.20
@@ -102,7 +106,9 @@ services:
       - "DC4 DC4.dgs.net:172.16.238.40"
     command: bash -c "samba-domain-join DC1 && samba -F"
     volumes:
-      - dc3-local-samba:/usr/local/samba
+      - dc3-etc:/usr/local/samba/etc
+      - dc3-private:/usr/local/samba/private
+      - dc3-var:/usr/local/samba/var
     networks:
       static-network:
         ipv4_address: 172.16.238.30
@@ -137,16 +143,26 @@ services:
       - "DC4 DC4.dgs.net:172.16.238.40"
     command: bash -c "samba-domain-join DC1 && samba -F"
     volumes:
-      - dc4-local-samba:/usr/local/samba
+      - dc4-etc:/usr/local/samba/etc
+      - dc4-private:/usr/local/samba/private
+      - dc4-var:/usr/local/samba/var
     networks:
       static-network:
         ipv4_address: 172.16.238.40
 
 volumes:
-  dc1-local-samba:
-  dc2-local-samba:
-  dc3-local-samba:
-  dc4-local-samba:
+  dc1-etc:
+  dc1-private:
+  dc1-var:
+  dc2-etc:
+  dc2-private:
+  dc2-var:
+  dc3-etc:
+  dc3-private:
+  dc3-var:
+  dc4-etc:
+  dc4-private:
+  dc4-var:
 
 
 networks:
