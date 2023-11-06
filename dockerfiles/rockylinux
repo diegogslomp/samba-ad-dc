@@ -58,13 +58,13 @@ ENV LC_CTYPE C.UTF-8
 ENV LC_MESSAGES C.UTF-8
 ENV LC_ALL C.UTF-8
 
-WORKDIR /usr/local/src/
+WORKDIR /usr/local/src
 RUN curl -O https://download.samba.org/pub/samba/samba-$SMB_VERSION.tar.gz && \
   mkdir samba && \
   tar zxvf samba-$SMB_VERSION.tar.gz -C samba --strip-components=1 && \
   rm -rf samba-$SMB_VERSION.tar.gz
 
-WORKDIR /usr/local/src/samba/
+WORKDIR /usr/local/src/samba
 RUN ./configure && \
   make -j 3 && \
   make install && \
@@ -77,5 +77,8 @@ CMD bash -c "samba-domain-provision && samba -F"
 VOLUME /usr/local/samba/etc
 VOLUME /usr/local/samba/private
 VOLUME /usr/local/samba/var
+
+HEALTHCHECK --interval=5s --timeout=3s --retries=60 \
+  CMD nc -z localhost 445 || exit 1
 
 EXPOSE 53 53/udp 88 88/udp 123/udp 135 137/udp 138/udp 139 389 389/udp 445 464 464/udp 636 3268 3269 49152-65535
