@@ -2,17 +2,53 @@ FROM debian
 
 RUN apt update && apt upgrade -y && \
   DEBIAN_FRONTEND=noninteractive \
-  apt install acl attr autoconf bind9utils bison build-essential \
-  debhelper dnsutils docbook-xml docbook-xsl flex gdb libjansson-dev krb5-user \
-  libacl1-dev libaio-dev libarchive-dev libattr1-dev libblkid-dev libbsd-dev \
-  libcap-dev libcups2-dev libgnutls28-dev libgpgme-dev libjson-perl \
-  libldap2-dev libncurses5-dev libpam0g-dev libparse-yapp-perl \
-  libpopt-dev libreadline-dev nettle-dev perl perl-modules pkg-config \
-  python3-all-dev python3-cryptography python3-dbg python3-dev python3-dnspython \
-  python3-dnspython python3-gpg python3-markdown \
-  python3-dev xsltproc zlib1g-dev liblmdb-dev lmdb-utils \
-  curl libdbus-1-dev vim iproute2 iputils-ping netcat-traditional jq ldap-utils -y && \
-  apt clean autoclean && \
+  apt install \
+    bind-utils \
+    bison \
+    dbus-devel \
+    docbook-style-xsl \
+    flex \
+    gcc \
+    gdb \
+    gnutls-devel \
+    gpgme-devel \
+    hostname \
+    iproute \
+    jansson-devel \
+    jq \
+    keyutils-libs-devel \
+    krb5-workstation \
+    libacl-devel \
+    libaio-devel \
+    libarchive-devel \
+    libattr-devel \
+    libblkid-devel \
+    libtasn1 \
+    libtasn1-tools \
+    libtirpc-devel \
+    libxml2-devel \
+    libxslt \
+    lmdb-devel \
+    netcat \
+    openldap-clients \
+    openldap-devel \
+    pam-devel \
+    perl \
+    perl-ExtUtils-MakeMaker \
+    perl-JSON \
+    perl-Parse-Yapp \
+    popt-devel \
+    python3-cryptography \
+    python3-devel \
+    python3-dns \
+    python3-gpg \
+    python3-markdown \
+    readline-devel \
+    rpcgen \
+    systemd-devel \
+    tar \
+    zlib-devel \
+  -y && apt clean autoclean && \
   apt autoremove -y
 
 ARG SMB_VERSION=latest
@@ -21,13 +57,13 @@ ENV LC_CTYPE C.UTF-8
 ENV LC_MESSAGES C.UTF-8
 ENV LC_ALL C.UTF-8
 
-WORKDIR /usr/local/src/
+WORKDIR /usr/local/src
 RUN curl -O https://download.samba.org/pub/samba/samba-$SMB_VERSION.tar.gz && \
   mkdir samba && \
   tar zxvf samba-$SMB_VERSION.tar.gz -C samba --strip-components=1 && \
   rm -rf samba-$SMB_VERSION.tar.gz
 
-WORKDIR /usr/local/src/samba/
+WORKDIR /usr/local/src/samba
 RUN ./configure && \
   make -j 3 && \
   make install && \
@@ -36,6 +72,7 @@ RUN ./configure && \
 WORKDIR /usr/local/sbin
 COPY sbin /usr/local/sbin
 CMD bash -c "samba-domain-provision && samba -F"
+
 VOLUME /usr/local/samba
 
 HEALTHCHECK --interval=5s --timeout=3s --retries=60 \
