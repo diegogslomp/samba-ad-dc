@@ -10,6 +10,8 @@ if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
   # If not the docker internal ip will be delivered to the clients
   # Do not bind interfaces on tests
   if [[ "${BIND_NETWORK_INTERFACES:-true}" == true ]]; then
+    # check if $INTERFACE is defined
+    if [[ -z $INTERFACE ]];then
 
     # Wait for network interface
     until ip a | grep BROADCAST >/dev/null 2>&1; do
@@ -19,6 +21,7 @@ if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
 
     INTERFACE=$(ip a | grep BROADCAST | head -n1 | awk '{print $2}' | sed 's/://')
 
+    else
     samba-tool domain provision \
       --server-role="${SERVER_ROLE:-dc}" \
       --use-rfc2307 \
@@ -29,7 +32,7 @@ if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
       --option="dns forwarder=${DNS_FORWARDER}" \
       --option="interfaces=lo ${INTERFACE}" \
       --option="bind interfaces only=yes"
-
+      fi
   else
 
     samba-tool domain provision \

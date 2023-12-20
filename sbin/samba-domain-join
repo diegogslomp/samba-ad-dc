@@ -15,7 +15,11 @@ if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
     echo "Waiting for ${server} LDAP response.."
     sleep 1
   done
+
+  # check if $INTERFACE is defined
+  if [[ -z $INTERFACE ]];then
   INTERFACE=$(ip a | grep BROADCAST | head -n1 | awk '{print $2}' | sed 's/://')
+  fi
 
   # Always bind interfaces, but not in tests
   if [[ "${BIND_NETWORK_INTERFACES:-true}" == true ]]; then
