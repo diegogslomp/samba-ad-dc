@@ -20,8 +20,8 @@ if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
     done
 
     INTERFACE=$(ip a | grep BROADCAST | head -n1 | awk '{print $2}' | sed 's/://')
+    fi
 
-    else
     samba-tool domain provision \
       --server-role="${SERVER_ROLE:-dc}" \
       --use-rfc2307 \
@@ -32,7 +32,7 @@ if [[ ! -e "${SAMBA_PATH:-/usr/local/samba}/private/secrets.keytab" ]]; then
       --option="dns forwarder=${DNS_FORWARDER}" \
       --option="interfaces=lo ${INTERFACE}" \
       --option="bind interfaces only=yes"
-      fi
+      
   else
 
     samba-tool domain provision \
