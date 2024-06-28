@@ -8,7 +8,7 @@
 
 Samba Active Directory Domain Controller Docker Image
 
-Provision a new domain on Linux
+Deploy a new domain on Linux
 ```
 docker run -d --privileged \
   --restart=unless-stopped --network=host \
@@ -22,7 +22,7 @@ docker run -d --privileged \
   --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
 ```
 
-On Windows Powershell (there's no network host mode so docker ip delivered)
+On Windows Powershell (there's no network host mode so the docker ip is delivered)
 ```
 docker run -d --privileged `
   --restart=unless-stopped `
@@ -36,7 +36,8 @@ docker run -d --privileged `
   -v dc1_var:/usr/local/samba/var `
   --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
 ````
-Show logs and run tests
+
+Logs and tests
 ```
 docker logs dc1 -f
 docker exec dc1 samba-tests
@@ -53,7 +54,7 @@ nameserver host_ip
 host_ip       DC1.samdom.example.com     DC1
 ```
 
-For multiple dc testing (no external access)
+For multiple DCs testing (no external access)
 ```
 git clone --single-branch https://github.com/diegogslomp/samba-ad-dc
 cd samba-ad-dc
