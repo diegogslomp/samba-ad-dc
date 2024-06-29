@@ -22,7 +22,7 @@ docker run -d --privileged \
   --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
 ```
 
-On Windows Powershell (there's no network host mode so the docker ip is delivered)
+On Windows (no network host mode, no published ports)
 ```
 docker run -d --privileged `
   --restart=unless-stopped `
