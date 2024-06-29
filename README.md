@@ -8,7 +8,7 @@
 
 Samba Active Directory Domain Controller Docker Image
 
-Deploy a new domain on Linux
+Deploy a new domain on a Linux host
 ```
 docker run -d --privileged \
   --restart=unless-stopped --network=host \
@@ -20,6 +20,23 @@ docker run -d --privileged \
   -v dc1_private:/usr/local/samba/private \
   -v dc1_var:/usr/local/samba/var \
   --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
+```
+
+Update the `/etc/resolv.conf` and `/etc/hosts`, replacing `host_ip`
+```
+# /etc/resolv.conf
+search samdom.example.com
+nameserver host_ip
+
+# /etc/hosts
+127.0.0.1     localhost
+host_ip       DC1.samdom.example.com     DC1
+```
+
+Logs and tests
+```
+docker logs dc1 -f
+docker exec dc1 samba-tests
 ```
 
 On Windows (no network host mode, no published ports)
@@ -37,24 +54,7 @@ docker run -d --privileged `
   --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
 ````
 
-Logs and tests
-```
-docker logs dc1 -f
-docker exec dc1 samba-tests
-```
-
-For external access on Linux, update the `/etc/resolv.conf` and `/etc/hosts` from your host, replacing `host_ip`
-```
-# /etc/resolv.conf
-search samdom.example.com
-nameserver host_ip
-
-# /etc/hosts
-127.0.0.1     localhost
-host_ip       DC1.samdom.example.com     DC1
-```
-
-For multiple DC testing (no external access)
+Multiple DC testing (no external access)
 ```
 git clone --single-branch https://github.com/diegogslomp/samba-ad-dc
 cd samba-ad-dc
