@@ -37,9 +37,11 @@ Logs and tests
 ```
 docker logs dc1 -f
 docker exec dc1 samba-tests
+docker exec dc1 samba-tool user list
+docker exec -it dc1 samba-tool user create someuser
 ```
 
-On Windows (no network host mode, no published ports)
+On Windows (no published ports)
 ```
 docker run -d --privileged `
   --restart=unless-stopped `
@@ -54,7 +56,7 @@ docker run -d --privileged `
   --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
 ````
 
-Multiple DC testing (no external access)
+Multiple DC testing (no published ports)
 ```
 git clone --single-branch https://github.com/diegogslomp/samba-ad-dc
 cd samba-ad-dc
