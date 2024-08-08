@@ -2,7 +2,8 @@ name: rockylinux
 
 on:
   push:
-    branches: ["master"]
+    branches:
+      - "*"
     paths-ignore:
       - "dev/**"
       - "docker-compose.yml"
@@ -12,7 +13,8 @@ on:
       - "README.md"
 
   pull_request:
-    branches: ["master"]
+    branches:
+      - "*"
     paths-ignore:
       - "dev/**"
       - "docker-compose.yml"
@@ -26,6 +28,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
+      - name: Download latest samba tar file
+        run: curl -o samba.tar.gz https://download.samba.org/pub/samba/samba-latest.tar.gz
+
       - name: Build the Docker image
         run: docker build . --file dockerfiles/rockylinux --tag samba-rockylinux

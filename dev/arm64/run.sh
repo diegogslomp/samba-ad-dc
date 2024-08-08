@@ -8,8 +8,8 @@ docker volume rm dc1-etc dc1-private dc1-var || true
 
 docker run -d --privileged \
   --restart=unless-stopped \
-  --network=host \
   --platform linux/arm64 \
+  -e BIND_NETWORK_INTERFACES=false \
   -e REALM='DGS.NET' \
   -e DOMAIN='DGS' \
   -e ADMIN_PASS='Passw0rd' \

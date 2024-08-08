@@ -2,9 +2,8 @@
 set -eo pipefail
 set -x
 
-if [[ -z "$SMB_VERSION" ]]; then
-  SMB_VERSION=$(dev/latest-published-samba.sh)
+if [[ ! -f samba.tar.gz ]]; then
+  curl -o samba.tar.gz https://download.samba.org/pub/samba/samba-latest.tar.gz
 fi
-export SMB_VERSION
 
 docker compose build

@@ -1,3 +1,67 @@
+FROM rockylinux:9 AS intermediate
+
+RUN yum update -y && \
+  yum install epel-release yum-utils -y && \
+  yum config-manager --enable epel && \
+  yum config-manager --set-enabled crb && \
+  yum install \
+    bind-utils \
+    bison \
+    dbus-devel \
+    docbook-style-xsl \
+    flex \
+    gcc \
+    gdb \
+    gnutls-devel \
+    gpgme-devel \
+    hostname \
+    iproute \
+    jansson-devel \
+    jq \
+    keyutils-libs-devel \
+    krb5-workstation \
+    libacl-devel \
+    libaio-devel \
+    libarchive-devel \
+    libattr-devel \
+    libblkid-devel \
+    libtasn1 \
+    libtasn1-tools \
+    libtirpc-devel \
+    libxml2-devel \
+    libxslt \
+    lmdb-devel \
+    netcat \
+    openldap-clients \
+    openldap-devel \
+    pam-devel \
+    perl \
+    perl-ExtUtils-MakeMaker \
+    perl-JSON \
+    perl-Parse-Yapp \
+    popt-devel \
+    python3-cryptography \
+    python3-devel \
+    python3-dns \
+    python3-gpg \
+    python3-markdown \
+    readline-devel \
+    rpcgen \
+    systemd-devel \
+    tar \
+    zlib-devel \
+  -y && yum clean all -y
+
+WORKDIR /usr/local/src
+COPY samba.tar.gz samba.tar.gz
+RUN mkdir samba && \
+  tar zxvf samba.tar.gz -C samba --strip-components=1
+
+WORKDIR /usr/local/src/samba
+RUN ./configure && \
+  make -j 3 && \
+  make install
+
 FROM rockylinux:9
 
 RUN yum update -y && \
@@ -52,23 +116,12 @@ RUN yum update -y && \
     zlib-devel \
   -y && yum clean all -y
 
-ARG SMB_VERSION=latest
 ENV PATH /usr/local/samba/bin:/usr/local/samba/sbin:$PATH
 ENV LC_CTYPE C.UTF-8
 ENV LC_MESSAGES C.UTF-8
 ENV LC_ALL C.UTF-8
 
-WORKDIR /usr/local/src
-RUN curl -O https://download.samba.org/pub/samba/samba-$SMB_VERSION.tar.gz && \
-  mkdir samba && \
-  tar zxvf samba-$SMB_VERSION.tar.gz -C samba --strip-components=1 && \
-  rm -rf samba-$SMB_VERSION.tar.gz
-
-WORKDIR /usr/local/src/samba
-RUN ./configure && \
-  make -j 3 && \
-  make install && \
-  rm -rf /usr/local/src/samba
+COPY --from=intermediate /usr/local/samba /usr/local/samba
 
 WORKDIR /usr/local/sbin
 COPY sbin /usr/local/sbin

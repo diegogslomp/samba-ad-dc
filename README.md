@@ -9,7 +9,7 @@
 Samba Active Directory Domain Controller Docker Image
 
 Deploy a new domain on a Linux host
-```
+```bash
 docker run -d --privileged \
   --restart=unless-stopped --network=host \
   -e REALM='SAMDOM.EXAMPLE.COM' \
@@ -23,7 +23,7 @@ docker run -d --privileged \
 ```
 
 Update the `/etc/resolv.conf` and `/etc/hosts`, replacing `host_ip`
-```
+```bash
 # /etc/resolv.conf
 search samdom.example.com
 nameserver host_ip
@@ -34,7 +34,7 @@ host_ip       DC1.samdom.example.com     DC1
 ```
 
 Logs and tests
-```
+```bash
 docker logs dc1 -f
 docker exec dc1 samba-tests
 docker exec dc1 samba-tool user list
@@ -42,7 +42,7 @@ docker exec -it dc1 samba-tool user create someuser
 ```
 
 On Windows (no published ports)
-```
+```powershell
 docker run -d --privileged `
   --restart=unless-stopped `
   -e REALM='SAMDOM.EXAMPLE.COM' `
@@ -56,10 +56,12 @@ docker run -d --privileged `
   --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
 ````
 
-Multiple DC testing (no published ports)
-```
+Multiple DC build and tests (no published ports)
+```bash
 git clone --single-branch https://github.com/diegogslomp/samba-ad-dc
 cd samba-ad-dc
+# Download and rename samba tar file
+curl -o samba.tar.gz https://download.samba.org/pub/samba/samba-latest.tar.gz
 docker compose build
 docker compose up -d
 docker compose logs -f

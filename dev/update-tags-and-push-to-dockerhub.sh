@@ -5,10 +5,7 @@ set -x
 repo="diegogslomp/samba-ad-dc"
 
 # Get samba version from last almalinux
-if [[ -z "$SMB_VERSION" ]]; then
-  SMB_VERSION=$(docker run --rm samba:almalinux samba --version | awk '{ print $2 }')
-fi
-version=$SMB_VERSION
+version=$(docker run --rm samba:almalinux samba --version | awk '{ print $2 }')
 
 
 # Update arm64
@@ -35,3 +32,4 @@ docker manifest rm diegogslomp/samba-ad-dc:latest
 # Cleanup
 docker image prune -f
 docker images
+rm -rf samba.tar.gz || true
