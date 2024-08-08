@@ -6,8 +6,6 @@ services:
     build:
       context: .
       dockerfile: dockerfiles/almalinux
-      args:
-        SMB_VERSION: "${SMB_VERSION:-latest}"
     container_name: dc1
     hostname: DC1
     privileged: true
