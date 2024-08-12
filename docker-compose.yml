@@ -25,7 +25,7 @@ services:
       - "DC2 DC2.dgs.net:172.16.238.20"
       - "DC3 DC3.dgs.net:172.16.238.30"
       - "DC4 DC4.dgs.net:172.16.238.40"
-    command: bash -c "samba-domain-provision && samba -F"
+    command: ["/bin/bash", "-c", "samba-domain-provision && samba -F"]
     volumes:
       - dc1_etc:/usr/local/samba/etc
       - dc1_private:/usr/local/samba/private
@@ -61,7 +61,7 @@ services:
       - "DC2 DC2.dgs.net:172.16.238.20"
       - "DC3 DC3.dgs.net:172.16.238.30"
       - "DC4 DC4.dgs.net:172.16.238.40"
-    command: bash -c "samba-domain-join DC1 && samba -F"
+    command: ["/bin/bash", "-c", "samba-domain-join DC1 && samba -F"]
     volumes:
       - dc2_etc:/usr/local/samba/etc
       - dc2_private:/usr/local/samba/private
@@ -96,7 +96,7 @@ services:
       - "DC2 DC2.dgs.net:172.16.238.20"
       - "DC3 DC3.dgs.net:172.16.238.30"
       - "DC4 DC4.dgs.net:172.16.238.40"
-    command: bash -c "samba-domain-join DC1 && samba -F"
+    command: ["/bin/bash", "-c", "samba-domain-join DC1 && samba -F"]
     volumes:
       - dc3_etc:/usr/local/samba/etc
       - dc3_private:/usr/local/samba/private
@@ -131,7 +131,7 @@ services:
       - "DC2 DC2.dgs.net:172.16.238.20"
       - "DC3 DC3.dgs.net:172.16.238.30"
       - "DC4 DC4.dgs.net:172.16.238.40"
-    command: bash -c "samba-domain-join DC1 && samba -F"
+    command: ["/bin/bash", "-c", "samba-domain-join DC1 && samba -F"]
     volumes:
       - dc4_etc:/usr/local/samba/etc
       - dc4_private:/usr/local/samba/private

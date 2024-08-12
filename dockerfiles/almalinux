@@ -66,16 +66,17 @@ RUN ./configure && \
 
 FROM base
 
-ENV PATH /usr/local/samba/bin:/usr/local/samba/sbin:$PATH
-ENV LC_CTYPE C.UTF-8
-ENV LC_MESSAGES C.UTF-8
-ENV LC_ALL C.UTF-8
+ENV PATH="/usr/local/samba/bin:/usr/local/samba/sbin:${PATH}"
+ENV LC_CTYPE="C.UTF-8"
+ENV LC_MESSAGES="C.UTF-8"
+ENV LC_ALL="C.UTF-8"
 
 COPY --from=compiled /usr/local/samba /usr/local/samba
 
 WORKDIR /usr/local/sbin
 COPY sbin /usr/local/sbin
-CMD bash -c "samba-domain-provision && samba -F"
+
+CMD ["/bin/bash", "-c", "samba-domain-provision && samba -F"]
 
 VOLUME /usr/local/samba/etc
 VOLUME /usr/local/samba/private
