@@ -1,4 +1,4 @@
-FROM debian AS intermediate
+FROM debian AS base
 
 RUN apt update && apt upgrade -y && \
   DEBIAN_FRONTEND=noninteractive \
@@ -59,6 +59,8 @@ RUN apt update && apt upgrade -y && \
     zlib1g-dev \
   -y && apt clean autoclean && \
   apt autoremove -y
+
+FROM base AS compiled
 
 WORKDIR /usr/local/src
 COPY samba.tar.gz samba.tar.gz
@@ -70,74 +72,14 @@ RUN ./configure && \
   make -j 3 && \
   make install
 
-FROM debian
-
-RUN apt update && apt upgrade -y && \
-  DEBIAN_FRONTEND=noninteractive \
-  apt install \
-    acl \
-    attr \
-    autoconf \
-    bind9utils \
-    bison \
-    build-essential \
-    curl \
-    debhelper \
-    dnsutils \
-    docbook-xml \
-    docbook-xsl \
-    flex \
-    gdb \
-    iproute2 \
-    iputils-ping \
-    jq \
-    krb5-user \
-    ldap-utils \
-    libacl1-dev \
-    libaio-dev \
-    libarchive-dev \
-    libattr1-dev \
-    libblkid-dev \
-    libbsd-dev \
-    libcap-dev \
-    libcups2-dev \
-    libdbus-1-dev \
-    libgnutls28-dev \
-    libgpgme-dev \
-    libjansson-dev \
-    libjson-perl \
-    libldap2-dev \
-    liblmdb-dev \
-    libncurses5-dev \
-    libpam0g-dev \
-    libparse-yapp-perl \
-    libpopt-dev \
-    libreadline-dev \
-    lmdb-utils \
-    netcat-traditional \
-    nettle-dev \
-    perl \
-    perl-modules \
-    pkg-config \
-    python3-all-dev \
-    python3-cryptography \
-    python3-dbg \
-    python3-dev \
-    python3-dnspython \
-    python3-gpg \
-    python3-markdown \
-    vim \
-    xsltproc \
-    zlib1g-dev \
-  -y && apt clean autoclean && \
-  apt autoremove -y
+FROM base
 
 ENV PATH /usr/local/samba/bin:/usr/local/samba/sbin:$PATH
 ENV LC_CTYPE C.UTF-8
 ENV LC_MESSAGES C.UTF-8
 ENV LC_ALL C.UTF-8
 
-COPY --from=intermediate /usr/local/samba /usr/local/samba
+COPY --from=compiled /usr/local/samba /usr/local/samba
 
 WORKDIR /usr/local/sbin
 COPY sbin /usr/local/sbin

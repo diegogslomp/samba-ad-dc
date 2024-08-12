@@ -1,4 +1,4 @@
-FROM almalinux:9 AS intermediate
+FROM almalinux:9 AS base
 
 RUN yum update -y && \
   yum install epel-release yum-utils -y && \
@@ -51,6 +51,8 @@ RUN yum update -y && \
     tar \
     zlib-devel \
   -y && yum clean all -y
+
+FROM base AS compiled
 
 WORKDIR /usr/local/src
 COPY samba.tar.gz samba.tar.gz
@@ -62,66 +64,14 @@ RUN ./configure && \
   make -j 3 && \
   make install
 
-FROM almalinux:9
-
-RUN yum update -y && \
-  yum install epel-release yum-utils -y && \
-  yum config-manager --enable epel && \
-  yum config-manager --set-enabled crb && \
-  yum install \
-    bind-utils \
-    bison \
-    dbus-devel \
-    docbook-style-xsl \
-    flex \
-    gcc \
-    gdb \
-    gnutls-devel \
-    gpgme-devel \
-    hostname \
-    iproute \
-    jansson-devel \
-    jq \
-    keyutils-libs-devel \
-    krb5-workstation \
-    libacl-devel \
-    libaio-devel \
-    libarchive-devel \
-    libattr-devel \
-    libblkid-devel \
-    libtasn1 \
-    libtasn1-tools \
-    libtirpc-devel \
-    libxml2-devel \
-    libxslt \
-    lmdb-devel \
-    netcat \
-    openldap-clients \
-    openldap-devel \
-    pam-devel \
-    perl \
-    perl-ExtUtils-MakeMaker \
-    perl-JSON \
-    perl-Parse-Yapp \
-    popt-devel \
-    python3-cryptography \
-    python3-devel \
-    python3-dns \
-    python3-gpg \
-    python3-markdown \
-    readline-devel \
-    rpcgen \
-    systemd-devel \
-    tar \
-    zlib-devel \
-  -y && yum clean all -y
+FROM base
 
 ENV PATH /usr/local/samba/bin:/usr/local/samba/sbin:$PATH
 ENV LC_CTYPE C.UTF-8
 ENV LC_MESSAGES C.UTF-8
 ENV LC_ALL C.UTF-8
 
-COPY --from=intermediate /usr/local/samba /usr/local/samba
+COPY --from=compiled /usr/local/samba /usr/local/samba
 
 WORKDIR /usr/local/sbin
 COPY sbin /usr/local/sbin
