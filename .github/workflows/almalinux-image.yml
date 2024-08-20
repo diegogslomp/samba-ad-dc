@@ -11,17 +11,7 @@ on:
       - "LICENSE"
       - "Makefile"
       - "README.md"
-
-  pull_request:
-    branches:
-      - "*"
-    paths-ignore:
-      - "dev/**"
-      - "docker-compose.yml"
-      - "docker-compose-dc1.yml"
-      - "LICENSE"
-      - "Makefile"
-      - "README.md"
+  workflow_dispatch:
 
 jobs:
   build:
