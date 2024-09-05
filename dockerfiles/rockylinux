@@ -61,7 +61,7 @@ RUN mkdir samba && \
 
 WORKDIR /usr/local/src/samba
 RUN ./configure && \
-  make -j 3 && \
+make -j$(nproc) && \
   make install
 
 FROM base
