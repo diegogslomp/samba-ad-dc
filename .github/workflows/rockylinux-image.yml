@@ -7,7 +7,7 @@ on:
     paths-ignore:
       - "dev/**"
       - "docker-compose.yml"
-      - "docker-compose-dc1.yml"
+      - "dc1.yml"
       - "LICENSE"
       - "Makefile"
       - "README.md"
