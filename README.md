@@ -1,6 +1,7 @@
 # samba-ad-dc
 
-[![dockerhub](https://img.shields.io/docker/v/diegogslomp/samba-ad-dc)](https://hub.docker.com/r/diegogslomp/samba-ad-dc)
+[![dockerhub](https://img.shields.io/docker/v/diegogslomp/samba-ad-dc%2Flatest)](https://hub.docker.com/r/diegogslomp/samba-ad-dc)
+[![size](https://img.shields.io/docker/image-size/diegogslomp/samba-ad-dc%2Flatest)](https://hub.docker.com/r/diegogslomp/samba-ad-dc/latest)
 [![gh-actions](https://github.com/diegogslomp/samba-ad-dc/actions/workflows/build.yml/badge.svg)](https://github.com/diegogslomp/samba-ad-dc/actions/workflows/build.yml)
 
 Samba Active Directory Domain Controller Docker Image
