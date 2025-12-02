@@ -1,0 +1,30 @@
+name: build
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - dev/**
+      - docker-compose.yml
+      - dc1.yml
+      - LICENSE
+      - Makefile
+      - README.md
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Download latest samba
+        run: curl -o samba.tar.gz https://download.samba.org/pub/samba/samba-latest.tar.gz
+
+      - name: Set up docker buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build docker images
+        run: docker compose build
