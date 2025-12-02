@@ -14,5 +14,5 @@ fi
 
 docker buildx build \
   --platform linux/arm64 \
-  -f dockerfiles/almalinux \
+  -f docker/almalinux.docker \
   --load --tag samba:arm64 .
