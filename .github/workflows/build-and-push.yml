@@ -4,16 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  login:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ vars.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-  build:
+  build-publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -34,5 +25,11 @@ jobs:
       - name: Show builds
         run: docker images
 
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       # - name: Tag and publish
-        # run: ./dev/arm64/update-tags-and-push-to-dockerhub.sh
+      #   run: ./dev/arm64/update-tags-and-push-to-dockerhub.sh
