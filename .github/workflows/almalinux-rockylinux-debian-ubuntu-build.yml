@@ -1,18 +1,6 @@
 name: almalinux rockylinux debian ubuntu build
 
 on:
-  push:
-    branches:
-      - master
-    paths-ignore:
-      - .github/**
-      - dev/**
-      - docker-compose.yml
-      - dc1.yml
-      - LICENSE
-      - Makefile
-      - README.md
-
   workflow_dispatch:
 
 jobs:
