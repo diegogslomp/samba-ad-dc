@@ -11,6 +11,7 @@ on:
       - LICENSE
       - Makefile
       - README.md
+      - .github/workflows
   workflow_dispatch:
 
 jobs:
