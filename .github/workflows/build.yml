@@ -5,13 +5,14 @@ on:
     branches:
       - master
     paths-ignore:
+      - .github/**
       - dev/**
       - docker-compose.yml
       - dc1.yml
       - LICENSE
       - Makefile
       - README.md
-      - .github/workflows
+
   workflow_dispatch:
 
 jobs:
