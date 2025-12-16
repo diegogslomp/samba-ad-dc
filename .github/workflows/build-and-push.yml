@@ -17,13 +17,10 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build amd
-        run: ./dev/amd64/build.sh
+        run: docker compose build dc1
 
       - name: Build arm
         run: ./dev/arm64/build.sh
-
-      - name: Show builds
-        run: docker images
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -31,5 +28,5 @@ jobs:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # - name: Tag and publish
-      #   run: ./dev/arm64/update-tags-and-push-to-dockerhub.sh
+      - name: Tag and publish
+        run: ./dev/update-tags-and-push-to-dockerhub.sh
