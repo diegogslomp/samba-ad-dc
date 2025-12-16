@@ -1,0 +1,38 @@
+name: build-and-push
+
+on:
+  workflow_dispatch:
+
+jobs:
+  login:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Download latest samba
+        run: curl -o samba.tar.gz https://download.samba.org/pub/samba/samba-latest.tar.gz
+
+      - name: Set up docker buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build amd
+        run: ./dev/amd64/build.sh
+
+      - name: Build arm
+        run: ./dev/arm64/build.sh
+
+      - name: Show builds
+        run: docker images
+
+      # - name: Tag and publish
+        # run: ./dev/arm64/update-tags-and-push-to-dockerhub.sh
