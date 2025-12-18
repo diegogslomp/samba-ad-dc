@@ -5,7 +5,7 @@ services:
     network_mode: host
     build:
       context: .
-      dockerfile: docker/almalinux.docker
+      dockerfile: dev/dockerfiles/almalinux
     container_name: dc1
     hostname: DC1
     privileged: true

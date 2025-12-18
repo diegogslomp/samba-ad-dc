@@ -54,7 +54,7 @@ docker run -d --privileged `
   --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
 ````
 
-Multiple DC build and tests (no published ports)
+Almalinux Rockylinux Debian Ubuntu build and test (no published ports)
 ```bash
 git clone --single-branch https://github.com/diegogslomp/samba-ad-dc
 cd samba-ad-dc
