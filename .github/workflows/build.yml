@@ -13,6 +13,9 @@ jobs:
       - name: Download latest samba
         run: curl -o samba.tar.gz https://download.samba.org/pub/samba/samba-latest.tar.gz
 
+      - name: Untar
+        run: tar zxvf samba.tar.gz -C samba --strip-components=1
+
       - name: Set up docker buildx
         uses: docker/setup-buildx-action@v3
 
