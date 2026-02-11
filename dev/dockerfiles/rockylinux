@@ -48,16 +48,13 @@ RUN yum update -y && \
     readline-devel \
     rpcgen \
     systemd-devel \
-    tar \
     zlib-devel \
   -y && yum clean all -y
 
 FROM base AS compiled
 
 WORKDIR /usr/local/src
-COPY samba.tar.gz samba.tar.gz
-RUN mkdir samba && \
-  tar zxvf samba.tar.gz -C samba --strip-components=1
+COPY samba samba
 
 WORKDIR /usr/local/src/samba
 RUN ./configure && \

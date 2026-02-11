@@ -33,3 +33,4 @@ docker manifest rm diegogslomp/samba-ad-dc:latest
 docker image prune -f
 docker images
 rm -rf samba.tar.gz || true
+rm -rf samba || true
