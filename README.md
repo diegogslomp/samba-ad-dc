@@ -21,7 +21,7 @@ docker run -d --privileged \
   --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
 ```
 
-2. Update the `/etc/resolv.conf` and `/etc/hosts`, replacing `host_ip`:
+2. Update `/etc/resolv.conf` and `/etc/hosts` files, replace `host_ip`:
 ```bash
 # /etc/resolv.conf
 search samdom.example.com
@@ -40,7 +40,7 @@ docker exec dc1 samba-tool user list
 docker exec -it dc1 samba-tool user create someuser
 ```
 
-## WSL Windows or Linux (no published ports)
+## Linux or Windows WSL (no published ports)
 ```bash
 docker pull diegogslomp/samba-ad-dc:latest
 docker tag diegogslomp/samba-ad-dc:latest samba:almalinux
@@ -52,7 +52,8 @@ docker exec -it dc1 samba-tests
 docker compose down -v dc1
 ```
 
-## Multi OS build (Almalinux Rockylinux Debian Ubuntu) (no published ports)
+## Multi OS build and deploy (no published ports)
+Almalinux + Rockylinux + Debian + Ubuntu build and test:
 ```bash
 git clone --single-branch https://github.com/diegogslomp/samba-ad-dc
 cd samba-ad-dc
@@ -64,7 +65,7 @@ docker compose logs -f
 for dc in dc{1,2,3,4}; do docker compose exec $dc samba-tests; done
 ```
 
-## Windows (no published ports)
+## Windows Powershell (no published ports)
 ```powershell
 docker run -d --privileged `
   --restart=unless-stopped `
