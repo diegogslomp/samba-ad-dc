@@ -6,7 +6,7 @@
 
 Samba Active Directory Domain Controller Docker Image
 
-## Linux or WSL (no exposed ports)
+## Linux or wsl
 ```bash
 docker run -d --privileged \
   --restart=unless-stopped \
@@ -21,8 +21,8 @@ docker run -d --privileged \
   --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
 ```
 
-## Linux Host (exposed ports for external access)
-Deploy a new domain:
+## Linux host exposing ports and host ip
+Deploy a new domain
 ```bash
 docker run -d --privileged \
   --restart=unless-stopped --network=host \
@@ -36,7 +36,7 @@ docker run -d --privileged \
   --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
 ```
 
-Update `/etc/resolv.conf` and `/etc/hosts`, replace `host_ip`:
+Update `/etc/resolv.conf` and `/etc/hosts`, replace `host_ip`
 ```bash
 # /etc/resolv.conf
 search samdom.example.com
@@ -47,7 +47,7 @@ nameserver host_ip
 host_ip       DC1.samdom.example.com     DC1
 ```
 
-Logs and tests:
+Logs and tests
 ```bash
 docker logs dc1 -f
 docker exec dc1 samba-tests
@@ -55,8 +55,8 @@ docker exec dc1 samba-tool user list
 docker exec -it dc1 samba-tool user create someuser
 ```
 
-## Multi OS build (no exposed ports)
-Almalinux + Rockylinux + Debian + Ubuntu build and tests:
+## Multi OS build
+Almalinux + Rockylinux + Debian + Ubuntu build and tests
 ```bash
 git clone --single-branch https://github.com/diegogslomp/samba-ad-dc
 cd samba-ad-dc
@@ -68,7 +68,7 @@ docker compose logs -f
 for dc in dc{1,2,3,4}; do docker compose exec $dc samba-tests; done
 ```
 
-## Windows Powershell (no exposed ports)
+## Powershell
 ```powershell
 docker run -d --privileged `
   --restart=unless-stopped `
@@ -83,10 +83,10 @@ docker run -d --privileged `
   --name dc1 --hostname DC1 diegogslomp/samba-ad-dc
 ```
 
-To Do:
+To Do
  - [Sysvol replication workaround](https://wiki.samba.org/index.php/Rsync_based_SysVol_replication_workaround)
 
-Links:
+Links
  - [Setup](https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_Domain_Controller)
  - [Dependencies](https://wiki.samba.org/index.php/Package_Dependencies_Required_to_Build_Samba)
  - [Exposed ports](https://wiki.samba.org/index.php/Samba_AD_DC_Port_Usage)
