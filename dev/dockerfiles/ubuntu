@@ -28,6 +28,7 @@ RUN apt update && apt upgrade -y && \
     libblkid-dev \
     libbsd-dev \
     libcap-dev \
+    libcrypt-dev \
     libcups2-dev \
     libdbus-1-dev \
     libgnutls28-dev \
